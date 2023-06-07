@@ -1,5 +1,5 @@
 {
-  "name": "template-client",
+  "name": "talenttrek-client",
   "private": true,
   "version": "0.0.0",
   "type": "module",
@@ -16,7 +16,8 @@
     "react-dom": "^18.2.0",
     "react-icons": "^4.9.0",
     "react-router-dom": "^6.11.2",
-    "sort-by": "^1.2.0"
+    "sort-by": "^1.2.0",
+    "theme-change": "^2.5.0"
   },
   "devDependencies": {
     "@types/react": "^18.0.37",

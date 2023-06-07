@@ -5,8 +5,21 @@ export default {
     "./src/**/*.{js,ts,jsx,tsx}",
   ],
   theme: {
-    extend: {},
+    extend: {
+      colors: {
+        ttOrange : '#F75640',
+      }
+    },
   },
-  plugins: [require("daisyui")],
+  plugins: [
+    require("daisyui"), 
+    function ({ addVariant }) {
+      addVariant('child', '& > *');
+      addVariant('child-hover', '& > *:hover');
+  }
+  ],
+  daisyui: {
+    themes:  false
+  },
 }
 
