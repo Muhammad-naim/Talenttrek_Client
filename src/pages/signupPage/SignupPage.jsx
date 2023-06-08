@@ -1,27 +1,34 @@
 import { Link, useNavigate } from "react-router-dom";
 import { useForm } from "react-hook-form";
-import { useContext } from "react";
+import { useContext, useState } from "react";
 import { AuthContext } from "../../firebase/authProvider/AuthProvider";
-
+import Swal from 'sweetalert2'
 
 const SignupPage = () => {
-    const { user, createUser, updateUserInfo, } = useContext(AuthContext)
+    const [showPassword, setShowPassword] = useState(false)
+    const { createUser, updateUserInfo, } = useContext(AuthContext)
     const navigate = useNavigate()
     const { register, handleSubmit, formState: { errors } } = useForm();
     const onSubmit = data => {
-        console.log(data);
+        if (data.password !== data.confirm) {
+            Swal.fire({
+                icon: 'error',
+                title: "Password didn't match",
+                text: 'Please check again!',
+              })
+            return
+        }
         createUser(data?.email, data?.password)
-            .then(result =>
-            {
+            .then(() => {
                 console.log(data.photoURl);
                 updateUserInfo(data.name, data.photoURl)
-                    .then(res => {
+                    .then(() => {
                         navigate('/')
-                })
-                }
-                
+                    })
+            }
+
             )
-            .catch(error => console.log(error.message))        
+            .catch(error => console.log(error.message))
     };
     return (
         <div>
@@ -31,43 +38,58 @@ const SignupPage = () => {
                         <div className="text-center ">
                             <h1 className="text-4xl font-bold font-heading">signup</h1>
                         </div>
-                        <form  onSubmit={handleSubmit(onSubmit)} className="card-body px-4 gap-0 py-3">
+                        <form onSubmit={handleSubmit(onSubmit)} className="card-body px-4 gap-0 py-3">
                             <div className="flex gap-2 justify-center">
                                 <div className="form-control">
                                     <label className="label">
                                         <span className="label-text ">Name</span>
                                     </label>
-                                    <input type="text" name="name" {...register("name")} required placeholder="name" className="input input-bordered h-8" />
+                                    <input type="text" {...register("name")} required placeholder="name" className="input input-bordered h-8" />
                                 </div>
                                 <div className="form-control">
                                     <label className="label">
                                         <span className="label-text">Photo</span>
                                     </label>
-                                    <input type="text" name="photoURL" placeholder="photo URL" {...register("photoURl")} required className="input input-bordered h-8" />
+                                    <input type="text" placeholder="photo URL" {...register("photoURl")} required className="input input-bordered h-8" />
                                 </div>
                             </div>
                             <div className="form-control">
                                 <label className="label">
                                     <span className="label-text ">Email</span>
                                 </label>
-                                <input type="text" name="email" placeholder="email" {...register("email")} required className="input input-bordered h-8" />
+                                <input type="text" placeholder="email" {...register("email")} required className="input input-bordered h-8" />
                             </div>
                             <div className="form-control">
                                 <label className="label">
                                     <span className="label-text">Password</span>
                                 </label>
-                                <input type="password" name="password" {...register("password")} required placeholder="password" className="input input-bordered h-8" />
+                                <input type={showPassword ? "text" : "password"} {...register("password", {
+                                    minLength: 6,
+                                    pattern: /(?=.*[A-Z])(?=.*[!@#$&*])(?=.*[0-9])/
+                                })} required placeholder="password" className="input input-bordered h-8" />
+                                {errors.password?.type === 'minLength' && <p className="text-red-600">Password must be 6 characters</p>}
+                                {errors.password?.type === 'pattern' && <p className="text-red-600">Password must contain one Uppercase, one number and one special character.</p>}
                             </div>
                             <div className="form-control">
                                 <label className="label">
                                     <span className="label-text ">Confirm password</span>
                                 </label>
-                                <input type="password" name="confirm" placeholder="confirm password"
-                                   {...register("confirm")} required className="input input-bordered h-8" />
+                                <input type={showPassword ? "text" : "password"} placeholder="confirm password"
+                                    {...register("confirm", {
+                                        minLength: 6,
+                                        pattern: /(?=.*[A-Z])(?=.*[!@#$&*])(?=.*[0-9])/,
+                                        
+                                    })} required className="input input-bordered h-8" />
+                                {errors.confirm?.type === 'minLength' && <p className="text-red-600">Password must be 6 characters</p>}
+                                {errors.confirm?.type === 'pattern' && <p className="text-red-600">Password must contain one Uppercase, one number and one special character.</p>}
                             </div>
                             <label className="label">
                                 <a href="#" className="label-text-alt link link-hover">Forgot password?</a>
                             </label>
+                            <div className="flex items-center  gap-2">
+                                <input type="checkbox" onChange={() => setShowPassword(!showPassword)} className="checkbox checkbox-xs" />
+                                <p>Show password</p>
+                            </div>
                             <div className="form-control mt-4">
                                 <button className="btn btn-ghost btn-sm btn-outline">Signup</button>
                             </div>

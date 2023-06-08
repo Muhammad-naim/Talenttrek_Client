@@ -6,12 +6,12 @@ import { useContext } from "react";
 import { AuthContext } from "../../firebase/authProvider/AuthProvider";
 
 const LoginPage = () => {
-    const { user, signInwithpassword, signInWithSocials, googleProvider, } = useContext(AuthContext)
+    const { signInwithpassword, signInWithSocials, googleProvider, } = useContext(AuthContext)
     const navigate = useNavigate()
-    const { register, handleSubmit, formState: { errors } } = useForm();
+    const { register, handleSubmit,} = useForm();
     const onSubmit = data => {
         signInwithpassword(data?.email, data?.password)
-            .then(result =>
+            .then(() =>
                 navigate('/')
         )
         .catch(error=>console.log(error.message))

@@ -1,6 +1,7 @@
 import { useContext } from "react";
 import Banner from "../../components/banner/Banner";
 import { AuthContext } from "../../firebase/authProvider/AuthProvider";
+import PopularClasses from "../../components/popularCalsses/PopularClasses";
 
 const Home = () => {
     const { user } = useContext(AuthContext)
@@ -8,6 +9,7 @@ const Home = () => {
     return (
         <div className="min-h-screen">
             <Banner />
+            <PopularClasses/>
            
         </div>
     );
