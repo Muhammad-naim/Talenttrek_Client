@@ -8,6 +8,10 @@ export default {
     extend: {
       colors: {
         ttOrange : '#F75640',
+      },
+      fontFamily: {
+        'poppins': ['Poppins'],
+        'tl-font': ['Rubik']
       }
     },
   },
