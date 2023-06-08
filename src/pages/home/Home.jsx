@@ -1,16 +1,17 @@
-import { useContext } from "react";
 import Banner from "../../components/banner/Banner";
-import { AuthContext } from "../../firebase/authProvider/AuthProvider";
 import PopularClasses from "../../components/popularCalsses/PopularClasses";
+import TopInstructor from "../../components/topInstructor/TopInstructor";
+import { Helmet } from "react-helmet-async";
 
 const Home = () => {
-    const { user } = useContext(AuthContext)
-    console.log(user);
     return (
         <div className="min-h-screen">
+            <Helmet>
+                <title>Home | talenttrek</title>
+            </Helmet>
             <Banner />
             <PopularClasses/>
-           
+           <TopInstructor/>
         </div>
     );
 };

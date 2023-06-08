@@ -3,10 +3,12 @@ import useCourses from "../../hooks/useCourses";
 import CourseCard from "../shared/courseCard/CourseCard";
 
 const PopularClasses = () => {
-    const [courses] = useCourses()
-    console.log(courses);
+    const [courses, loading] = useCourses()
     const popularCourses = courses.filter(course => course.students >= 15)
-    console.log(popularCourses);
+    console.log(courses);
+    if (loading) {
+        return <div className="w-full text-center"><span className="loading loading-spinner loading-lg text-center"></span></div>
+    }
     return (
         <div className="my-4">
             <Heading

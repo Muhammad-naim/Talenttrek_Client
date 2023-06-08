@@ -4,6 +4,7 @@ import { Link, useNavigate } from "react-router-dom";
 import { useForm } from "react-hook-form";
 import { useContext } from "react";
 import { AuthContext } from "../../firebase/authProvider/AuthProvider";
+import { Helmet } from "react-helmet-async";
 
 const LoginPage = () => {
     const { signInwithpassword, signInWithSocials, googleProvider, } = useContext(AuthContext)
@@ -19,6 +20,9 @@ const LoginPage = () => {
     
     return (
         <div>
+            <Helmet>
+                <title>Login | talenttrek</title>
+            </Helmet>
             <div className="hero min-h-screen bg-base-200">
                 <div className="hero-content flex-col lg:flex-row-reverse items-center gap-5">
                     <div className="text-center pl-10">

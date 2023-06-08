@@ -27,11 +27,11 @@ const Banner = () => {
                             className="h-40 lg:h-96 relative bg-cover bg-no-repeat"
                             style={{ backgroundImage: `url(${banner.imageURL})`, backgroundPosition: "center" }}
                         >
-                            <div className="absolute inset-0 bg-black bg-opacity-70 lg:flex flex-col justify-center items-center px-5">
+                            <div className="absolute inset-0 bg-black bg-opacity-70 lg:flex flex-col justify-center items-center px-8">
                                 <div className="grid grid-cols-3 w-full">
                                     <div className="text-left col-span-2">
                                         <h3 className="text-white  lg:text-5xl">{banner.text}</h3>
-                                        <button className="btn btn-sm mt-3">
+                                        <button className="btn btn-sm mt-3 btn-outline text-white hover:bg-slate-50 hover:text-black">
                                             Explore
                                         </button>
                                     </div>

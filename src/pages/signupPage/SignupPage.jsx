@@ -3,6 +3,7 @@ import { useForm } from "react-hook-form";
 import { useContext, useState } from "react";
 import { AuthContext } from "../../firebase/authProvider/AuthProvider";
 import Swal from 'sweetalert2'
+import { Helmet } from "react-helmet-async";
 
 const SignupPage = () => {
     const [showPassword, setShowPassword] = useState(false)
@@ -32,6 +33,9 @@ const SignupPage = () => {
     };
     return (
         <div>
+            <Helmet>
+                <title>Signup | talenttrek</title>
+            </Helmet>
             <div className="hero font-tl-font">
                 <div className="hero-content flex-col lg:flex-row-reverse">
                     <div className="card flex-shrink-0 w-full  shadow-2xl bg-base-100">
