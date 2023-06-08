@@ -5,9 +5,9 @@ import { useContext } from 'react';
 import { AuthContext } from '../../../firebase/authProvider/AuthProvider';
 
 const Navbar = () => {
-    const {user} = useContext(AuthContext)
+    const {user, logOut} = useContext(AuthContext)
     const handleLogout = () => {
-        
+        logOut()
     }
     return (
         <div className='sticky top-0 z-50'>

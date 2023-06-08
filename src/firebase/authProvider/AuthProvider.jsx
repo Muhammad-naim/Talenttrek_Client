@@ -27,8 +27,9 @@ const AuthProvider = ({children}) => {
         return signInWithPopup(auth, Provider)
     }
 
-    const updateUserInfo = (name,  phoneNumber) => {
-        return updateProfile(auth.currentUser, { displayName: name,  phoneNumber: phoneNumber })
+    const updateUserInfo = (name, photoURL) => {
+        console.log(photoURL);
+        return updateProfile(auth.currentUser, { displayName: name, photoURL: photoURL })
     }
     // observe user state and get user data 
     useEffect(() => {

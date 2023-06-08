@@ -12,10 +12,13 @@ const SignupPage = () => {
         console.log(data);
         createUser(data?.email, data?.password)
             .then(result =>
-                updateUserInfo(data.name, data.photoURL)
+            {
+                console.log(data.photoURl);
+                updateUserInfo(data.name, data.photoURl)
                     .then(res => {
                         navigate('/')
                 })
+                }
                 
             )
             .catch(error => console.log(error.message))        
@@ -53,13 +56,13 @@ const SignupPage = () => {
                                 <label className="label">
                                     <span className="label-text">Password</span>
                                 </label>
-                                <input type="text" name="password" {...register("password")} required placeholder="password" className="input input-bordered h-8" />
+                                <input type="password" name="password" {...register("password")} required placeholder="password" className="input input-bordered h-8" />
                             </div>
                             <div className="form-control">
                                 <label className="label">
                                     <span className="label-text ">Confirm password</span>
                                 </label>
-                                <input type="text" name="confirm" placeholder="confirm password"
+                                <input type="password" name="confirm" placeholder="confirm password"
                                    {...register("confirm")} required className="input input-bordered h-8" />
                             </div>
                             <label className="label">
