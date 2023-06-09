@@ -8,23 +8,45 @@ import { EffectCards } from "swiper";
 import AOS from 'aos';
 import 'aos/dist/aos.css';
 import useInstructors from "../../hooks/useInstructors";
-import { useEffect } from "react";
+import { useEffect, useRef } from "react";
 
 const TopInstructor = () => {
+    const targetRef = useRef(null);
+    useEffect(() => {
+        const observer = new IntersectionObserver((entries) => {
+          entries.forEach((entry) => {
+            if (entry.isIntersecting) {
+                AOS.refresh();
+            } 
+          });
+        });
+        if (targetRef.current) {
+          observer.observe(targetRef.current);
+        }
+        return () => {
+          if (targetRef.current) {
+            observer.unobserve(targetRef.current);
+          }
+        };
+    }, []);
+    
     useEffect(() => {
         AOS.init();
     }, [])
+
     const [instructors] = useInstructors()
     return (
-        <div className="my-4">
+        <div className="my-4 overflow-x-hidden">
             <Heading
-                Heading={"Meet Our Top Instructor"}
+                Heading={"Meet Our Popular Instructor"}
                 subHeading={"World class instructors are ready to teach you"}
             />
-            <div className="grid grid-cols-2 lg:px-8">
+            <div className="grid lg:grid-cols-2 gap-2 lg:px-8">
                 <div
+                    ref={targetRef}
                     data-aos="fade-right"
-                    className="lg:pl-12 flex flex-col justify-center">
+                    data-aos-once="false"
+                    className="lg:pl-12 flex flex-col text-center lg:text-left justify-center">
                     <p className="text-lg mb-3">
                         Learning from our top instructors is an investment in your linguistic future. Their expertise and dedication to your success will propel you towards fluency and open doors to new opportunities in your personal and professional life.
                     </p>

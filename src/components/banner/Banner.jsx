@@ -11,6 +11,11 @@ const Banner = () => {
                 setBannerContent(data)
             })
     }, [])
+    if (bannerContent.length === 0) {
+        return <div className="h-96 flex justify-center items-center">
+            <span className="loading loading-spinner loading-lg"></span>
+        </div>
+    }
     return (
         <div>
             <Carousel

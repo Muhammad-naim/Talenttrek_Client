@@ -21,6 +21,8 @@ const PopularClasses = () => {
                        return <CourseCard
                            key={course?._id} 
                            course={course}
+                           badgeText={'Popular'}
+                           
                         />
                     })
                 }

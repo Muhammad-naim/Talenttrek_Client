@@ -4,6 +4,7 @@ import PopularClasses from "../../components/popularCalsses/PopularClasses";
 import TopInstructor from "../../components/topInstructor/TopInstructor";
 import { Helmet } from "react-helmet-async";
 import useScrollTop from "../../hooks/useScrollTop";
+import DiscountPage from "../../components/discountPage/DiscountPage";
 
 const Home = () => {
     const location = useLocation()
@@ -15,8 +16,9 @@ const Home = () => {
                 <title>Home | talenttrek</title>
             </Helmet>
             <Banner />
+            <DiscountPage/>
             <PopularClasses/>
-           <TopInstructor/>
+            <TopInstructor/>
         </div>
     );
 };
