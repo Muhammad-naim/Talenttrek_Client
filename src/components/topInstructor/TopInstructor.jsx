@@ -1,14 +1,68 @@
 import Heading from "../heading/Heading";
+// Import Swiper React components
+import { Swiper, SwiperSlide } from "swiper/react";
+import "swiper/css";
+import "swiper/css/effect-cards";
+import "./Topinstructor.css";
+import { EffectCards } from "swiper";
+import AOS from 'aos';
+import 'aos/dist/aos.css';
+import useInstructors from "../../hooks/useInstructors";
+import { useEffect } from "react";
 
 const TopInstructor = () => {
+    useEffect(() => {
+        AOS.init();
+    }, [])
+    const [instructors] = useInstructors()
     return (
-        <div>
+        <div className="my-4">
             <Heading
                 Heading={"Meet Our Top Instructor"}
                 subHeading={"World class instructors are ready to teach you"}
             />
-            
-        </div>
+            <div className="grid grid-cols-2 lg:px-8">
+                <div
+                    data-aos="fade-right"
+                    className="lg:pl-12 flex flex-col justify-center">
+                    <p className="text-lg mb-3">
+                        Learning from our top instructors is an investment in your linguistic future. Their expertise and dedication to your success will propel you towards fluency and open doors to new opportunities in your personal and professional life.
+                    </p>
+                    <div>
+                        <button className="btn btn-outline btn-sm ">Explore</button>
+                    </div>
+                </div>
+                <Swiper
+                    data-aos="fade-left"
+                    effect={"cards"}
+                    grabCursor={true}
+                    modules={[EffectCards]}
+                    className="mySwiper"
+                >
+                    {
+                        instructors.map(instructor => {
+                            return <SwiperSlide
+                                key={instructor._id}
+                                className="bg-base-200 border-2 shadow-xl grid grid-rows-2 text-black font-normal "
+                            >
+                                <>
+                                    <div className="">
+                                        <img src={instructor.imageURL} className="border border-slate-900 rounded-full h-32 mx-auto  " />
+                                    </div>
+                                    <div className="text-center flex-col justify-start px-1">
+                                        <p className="text-base font-semibold">{instructor.name}</p>
+                                        <p className="text-base">{instructor.email}</p>
+                                        <p className="text-base">Courses: {instructor.courses}</p>
+                                        <button className="btn btn-primary btn-xs">See details</button>
+                                    </div>
+                                </>
+                            </SwiperSlide>
+                        })
+                    }
+                </Swiper>
+            </div>
+
+        </div >
     );
 };
 
