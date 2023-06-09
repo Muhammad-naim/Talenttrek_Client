@@ -20,7 +20,7 @@ const Navbar = () => {
                         <ul tabIndex={0} className="menu menu-sm dropdown-content mt-3 p-2 shadow bg-base-100 rounded-box w-52">
                             <li><Link>Home</Link></li>
                             <li><Link to={'/instructors'}>Instructor</Link></li>
-                            <li><Link>Classes</Link></li>
+                            <li><Link to={'/classes'} >Classes</Link></li>
                             {
                                 user ?
                                     <li><Link to={"/"}>Dashboard</Link></li>
@@ -39,7 +39,7 @@ const Navbar = () => {
                             <Link to={"/instructors"} >Instructors</Link>
                         </li>
                         <li>
-                            <Link to={"/"}>Classes</Link>
+                            <Link to={"/classes"}>Classes</Link>
                         </li>
                         {
                             user ?
