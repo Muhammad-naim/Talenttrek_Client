@@ -20,9 +20,9 @@ const Dashboard = () => {
                 </div>
                 <div className="drawer-side">
                     <label htmlFor="my-drawer-2" className="drawer-overlay"></label>
-                    <ul className="menu p-4 pt-2 w-56 h-full bg-sky-200 child:text-center">
+                    <ul className="menu p-0 pt-2 w-56 h-full bg-sky-200 child:border-b child:border-slate-400 child:font-semibold child:">
                         {/* Sidebar content here */}
-                        <li><Link to={'/dashboard/profile'}><FaUser/>Profile</Link></li>
+                        <li><Link to={'/dashboard'}><FaUser/>Profile</Link></li>
                         <li><Link to={'/dashboard/myclasses'}><FaChalkboardTeacher/>My Classes</Link></li>
                         <li><Link to={'/dashboard/enrolled-class'}><SiGoogleclassroom/>Enrolled classes</Link></li>
 

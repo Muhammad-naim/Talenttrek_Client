@@ -10,7 +10,6 @@ const InstructorsPage = () => {
             .then(res => res.json())
             .then(data => setInstructors(data))
     }, [])
-    console.log(instructors);
     return (
         <div className="grid grid-cols-1 lg:grid-cols-4  mt-8">
             <Helmet>

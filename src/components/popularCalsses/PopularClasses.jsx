@@ -5,7 +5,6 @@ import CourseCard from "../shared/courseCard/CourseCard";
 const PopularClasses = () => {
     const [courses, loading] = useCourses()
     const popularCourses = courses.filter(course => course.students >= 15)
-    console.log(courses);
     if (loading) {
         return <div className="w-full text-center"><span className="loading loading-spinner loading-lg text-center"></span></div>
     }
