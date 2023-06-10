@@ -11,7 +11,6 @@ const Navbar = () => {
         logOut()
     }
     const handleTheme = (e) => {
-        console.log(e.target.checked);
         if (e.target.checked) {
             setTheme('dark')
         }
@@ -22,10 +21,8 @@ const Navbar = () => {
     useEffect(() => {
         localStorage.setItem("theme", theme);
         const localTheme = localStorage.getItem("theme");
-        // add custom data-theme attribute to html tag required to update theme using DaisyUI
         document.querySelector("html").setAttribute("data-theme", localTheme);
       }, [theme]);
-    console.log(theme);
     return (
         <div className='sticky top-0 z-50'>
             <div className="navbar bg-base-100 py-0">

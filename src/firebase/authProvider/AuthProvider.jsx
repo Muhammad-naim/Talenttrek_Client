@@ -27,14 +27,27 @@ const AuthProvider = ({children}) => {
         return signInWithPopup(auth, Provider)
     }
 
-    const updateUserInfo = (name, photoURL) => {
-        console.log(photoURL);
-        return updateProfile(auth.currentUser, { displayName: name, photoURL: photoURL })
+    const updateUserInfo = (name, photoUrl) => {
+        return updateProfile(auth.currentUser, { displayName: name, photoURL: photoUrl })
     }
     // observe user state and get user data 
     useEffect(() => {
         const unsubscribe = onAuthStateChanged(auth, (loggedUser) => {
             setUser(loggedUser);
+            if (loggedUser.email) {
+                const userEmail = loggedUser.email;
+                fetch('http://localhost:5000/jwt', {
+                    method: "POST",
+                    headers: {
+                        "content-type" : "application/json",
+                    },
+                    body: JSON.stringify({email : userEmail})
+                })
+                    .then(res => res.json())
+                    .then(data => {
+                        localStorage.setItem('access-token', data.token)
+                    })
+            }
             setLoading(false)
         })
         return () => unsubscribe()

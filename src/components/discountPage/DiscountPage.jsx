@@ -1,11 +1,11 @@
 import { useEffect,  } from "react";
 import Heading from "../heading/Heading";
 import useCourses from "../../hooks/useCourses";
-import CourseCard from "../shared/courseCard/CourseCard";
 import { useKeenSlider } from "keen-slider/react"
 import "keen-slider/keen-slider.min.css"
 import AOS from 'aos';
 import 'aos/dist/aos.css';
+import ClassesCard from "../shared/classesCard/ClassesCard";
 
 const DiscountPage = () => {
     const [courses] = useCourses()
@@ -98,7 +98,7 @@ const DiscountPage = () => {
                                 // data-aos="fade-up"
                                 // data-aos-offset="100"
                             >
-                                <CourseCard                               
+                                <ClassesCard
                                     course={course}
                                     badgeText={'Hot'}
                             />

@@ -9,7 +9,7 @@ const SignupPage = () => {
     const [showPassword, setShowPassword] = useState(false)
     const { createUser, updateUserInfo, } = useContext(AuthContext)
     const navigate = useNavigate()
-    const { register, handleSubmit, formState: { errors } } = useForm();
+    const { register, handleSubmit,reset , formState: { errors } } = useForm();
     const onSubmit = data => {
         if (data.password !== data.confirm) {
             Swal.fire({
@@ -21,11 +21,32 @@ const SignupPage = () => {
         }
         createUser(data?.email, data?.password)
             .then(() => {
-                console.log(data.photoURl);
                 updateUserInfo(data.name, data.photoURl)
                     .then(() => {
-                        navigate('/')
+                        const user = { name: data.name, email: data.email }
+                        fetch('http://localhost:5000/users', {
+                            method: "POST",
+                            headers: {
+                                "content-type" : 'application/json',
+                            },
+                            body: JSON.stringify(user)
+                        })
+                            .then(res => res.json())
+                            .then(data => {
+                                if (data.insertedId) {
+                                    reset();
+                                    Swal.fire({
+                                        position: 'center',
+                                        icon: 'success',
+                                        title: 'User created successfully.',
+                                        showConfirmButton: false,
+                                        timer: 1500
+                                    });
+                                    navigate('/')
+                                }
+                            })                       
                     })
+                
             }
 
             )

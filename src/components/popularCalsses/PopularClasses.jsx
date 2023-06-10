@@ -1,6 +1,6 @@
 import Heading from "../heading/Heading";
 import useCourses from "../../hooks/useCourses";
-import CourseCard from "../shared/courseCard/CourseCard";
+import ClassesCard from "../shared/classesCard/ClassesCard";
 
 const PopularClasses = () => {
     const [courses, loading] = useCourses()
@@ -17,7 +17,7 @@ const PopularClasses = () => {
             <div className="grid lg:grid-cols-4 gap-3 px-2 lg:px-0">
                 {
                    popularCourses.map(course => {
-                       return <CourseCard
+                       return <ClassesCard
                            key={course?._id} 
                            course={course}
                            badgeText={'Popular'}
