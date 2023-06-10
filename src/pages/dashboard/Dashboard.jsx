@@ -1,4 +1,4 @@
-import { Link } from "react-router-dom";
+import { Link, Outlet } from "react-router-dom";
 import {  FaChalkboardTeacher, FaUser } from 'react-icons/fa';
 import {  SiGoogleclassroom } from 'react-icons/Si';
 import { Helmet } from "react-helmet-async";
@@ -13,7 +13,7 @@ const Dashboard = () => {
                 <div className="drawer-content flex flex-col items-start justify-start gap-2 pl-3">
                     {/* Page content here */}
                     <label htmlFor="my-drawer-2" className="btn btn-xs drawer-button lg:hidden">{'>'}</label>
-
+                        <Outlet/>
                     <div>
                         
                     </div>
@@ -22,9 +22,9 @@ const Dashboard = () => {
                     <label htmlFor="my-drawer-2" className="drawer-overlay"></label>
                     <ul className="menu p-4 pt-2 w-56 h-full bg-sky-200 child:text-center">
                         {/* Sidebar content here */}
-                        <li><Link><FaUser/>Profile</Link></li>
-                        <li><Link><FaChalkboardTeacher/>My Classes</Link></li>
-                        <li><Link><SiGoogleclassroom/>Enrolled classes</Link></li>
+                        <li><Link to={'/dashboard/profile'}><FaUser/>Profile</Link></li>
+                        <li><Link to={'/dashboard/myclasses'}><FaChalkboardTeacher/>My Classes</Link></li>
+                        <li><Link to={'/dashboard/enrolled-class'}><SiGoogleclassroom/>Enrolled classes</Link></li>
 
                     </ul>
 

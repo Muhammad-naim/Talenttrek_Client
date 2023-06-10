@@ -7,6 +7,9 @@ import SignupPage from "../pages/signupPage/SignupPage";
 import InstructorsPage from "../pages/instructorsPage/InstructorsPage";
 import ClassesPage from "../pages/classesPage/ClassesPage";
 import Dashboard from "../pages/dashboard/Dashboard";
+import MyClasses from "../pages/dashboard/students/MyClasses";
+import EnrolledClasses from "../pages/dashboard/students/enrolledClasses";
+import MyProfile from "../pages/dashboard/students/MyProfile";
 
 const router = createBrowserRouter([
     {
@@ -36,7 +39,21 @@ const router = createBrowserRouter([
             },
             {
                 path: '/dashboard',
-                element: <Dashboard/>
+                element: <Dashboard />,
+                children: [
+                    {
+                        path: 'profile',
+                        element: <MyProfile/>
+                    },
+                    {
+                        path: 'myclasses',
+                        element: <MyClasses/>
+                    },
+                    {
+                        path: 'enrolled-class',
+                        element: <EnrolledClasses/>
+                    }
+                ]
             },
             // {
             //     path: 
