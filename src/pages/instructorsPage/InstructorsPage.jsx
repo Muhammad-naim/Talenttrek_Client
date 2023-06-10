@@ -1,10 +1,13 @@
 import { useEffect, useState } from "react";
 import { FaUsers } from "react-icons/fa";
 import './InstructorsPage.css'
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 import { Helmet } from "react-helmet-async";
+import useScrollTop from "../../hooks/useScrollTop";
 const InstructorsPage = () => {
     const [instructors, setInstructors] = useState([])
+    const location = useLocation()
+    useScrollTop(location?.pathname)
     useEffect(() => {
         fetch('http://localhost:5000/instructors')
             .then(res => res.json())

@@ -6,11 +6,13 @@ import { useContext } from "react";
 import { AuthContext } from "../../firebase/authProvider/AuthProvider";
 import Swal from "sweetalert2";
 import { useLocation, useNavigate } from "react-router-dom";
+import useScrollTop from "../../hooks/useScrollTop";
 const ClassesPage = () => {
     const [courses, loading] = useCourses()
     const { user } = useContext(AuthContext)
     const navigate = useNavigate();
     const location = useLocation();
+    useScrollTop(location?.pathname)
     const handleselect = course => {
         if (user) {
             const courseID = course._id;

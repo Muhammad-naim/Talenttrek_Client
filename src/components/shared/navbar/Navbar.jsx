@@ -80,9 +80,9 @@ const Navbar = () => {
                             <div className="tooltip tooltip-left " data-tip={user?.displayName}>
                                 <img src={user?.photoURL} alt="user" className="h-8 w-8 rounded-full" />
                             </div>
-                            <button onClick={handleLogout} className="ml-3 p-1 rounded bg-ttOrange">Logout</button>
+                            <button onClick={handleLogout} className="ml-3 text-white p-1 rounded bg-[#4169E1]">Logout</button>
                         </> :
-                            <Link to={'/login'} className="btn btn-ghost btn-sm bg-ttOrange">Login</Link>
+                            <Link to={'/login'} className="btn btn-ghost btn-sm text-white bg-[#4169E1]">Login</Link>
                     }
                 </div>
             </div>

@@ -1,8 +1,12 @@
-import { Link, Outlet } from "react-router-dom";
+import { Link, Outlet, useLocation } from "react-router-dom";
 import {  FaChalkboardTeacher, FaUser } from 'react-icons/fa';
 import {  SiGoogleclassroom } from 'react-icons/Si';
 import { Helmet } from "react-helmet-async";
+import useScrollTop from "../../hooks/useScrollTop";
 const Dashboard = () => {
+    const location = useLocation()
+    useScrollTop(location?.pathname)
+    useScrollTop()
     return (
         <div className="flex justify-start">
             <Helmet>
