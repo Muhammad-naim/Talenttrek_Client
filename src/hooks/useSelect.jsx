@@ -1,14 +1,10 @@
-import useCourses from "../../hooks/useCourses";
-import './styles.css'
-import { Helmet } from "react-helmet-async";
-import ClassesCard from "../../components/shared/classesCard/ClassesCard";
 import { useContext } from "react";
-import { AuthContext } from "../../firebase/authProvider/AuthProvider";
+import { AuthContext } from "../firebase/authProvider/AuthProvider";
 import Swal from "sweetalert2";
 import { useLocation, useNavigate } from "react-router-dom";
-const ClassesPage = () => {
-    const [courses, loading] = useCourses()
-    const { user } = useContext(AuthContext)
+
+const useSelect = () => {
+    const { user } = useContext(AuthContext);
     const navigate = useNavigate();
     const location = useLocation();
     const handleselect = course => {
@@ -27,7 +23,6 @@ const ClassesPage = () => {
                 .then(data => {
 
                     if (data.insertedId) {
-                        console.log(data);
                         Swal.fire({
                             position: 'top-end',
                             icon: 'success',
@@ -44,7 +39,6 @@ const ClassesPage = () => {
                 showCancelButton: true,
                 confirmButtonText: 'Login',
             }).then((result) => {
-                /* Read more about isConfirmed, isDenied below */
                 if (result.isConfirmed) {
                     navigate('/login', { state: { from: location } })
                 }
@@ -52,30 +46,7 @@ const ClassesPage = () => {
         }
 
     }
-    if (loading) {
-        return <div className="h-96 flex justify-center items-center">
-            <span className="loading loading-spinner loading-lg"></span>
-        </div>
-    }
-    return (
-        <>
-            <div className="grid grid-cols-4">
-                <Helmet>
-                    <title>classes | talenttrek</title>
-                </Helmet>
-                {
-                    courses.map(course => {
-                        return <ClassesCard
-                            key={course._id}
-                            course={course}
-                            handleselect={handleselect}
-                        />
-                    })
-                }
-            </div>
-        </>
-
-    );
+    return { handleselect}
 };
 
-export default ClassesPage;
+export default useSelect;

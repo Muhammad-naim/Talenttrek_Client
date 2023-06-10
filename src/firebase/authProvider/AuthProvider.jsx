@@ -34,7 +34,7 @@ const AuthProvider = ({children}) => {
     useEffect(() => {
         const unsubscribe = onAuthStateChanged(auth, (loggedUser) => {
             setUser(loggedUser);
-            if (loggedUser.email) {
+            if (loggedUser?.email) {
                 const userEmail = loggedUser.email;
                 fetch('http://localhost:5000/jwt', {
                     method: "POST",

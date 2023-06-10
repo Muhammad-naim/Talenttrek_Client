@@ -17,7 +17,14 @@ const LoginPage = () => {
         )
         .catch(error=>console.log(error.message))
     };
-    
+    const handleSocialLogin = () => {
+        console.log('licker');
+        signInWithSocials(googleProvider)
+            .then(() => {
+                navigate('/')
+        })
+        
+    }
     return (
         <div>
             <Helmet>
@@ -58,7 +65,7 @@ const LoginPage = () => {
                         <div className="flex justify-center mb-4">
                             <button
                                 className="btn btn-sm btn-outline w-5/6"
-                                onClick={()=>signInWithSocials(googleProvider)}
+                                onClick={handleSocialLogin}
                             >google</button>
                         </div>
                     </div>

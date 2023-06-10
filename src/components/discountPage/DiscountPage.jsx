@@ -6,9 +6,13 @@ import "keen-slider/keen-slider.min.css"
 import AOS from 'aos';
 import 'aos/dist/aos.css';
 import ClassesCard from "../shared/classesCard/ClassesCard";
+import { useLocation } from "react-router-dom";
+import useSelect from "../../hooks/useSelect";
 
 const DiscountPage = () => {
     const [courses] = useCourses()
+    const { handleselect } = useSelect();
+    // console.log(handleselect);
     useEffect(() => {
         const secondElement = document.querySelector('.second span');
         const hourElement = document.querySelector('.hour span');
@@ -101,6 +105,7 @@ const DiscountPage = () => {
                                 <ClassesCard
                                     course={course}
                                     badgeText={'Hot'}
+                                    handleselect={handleselect}
                             />
                             </div>
                         })

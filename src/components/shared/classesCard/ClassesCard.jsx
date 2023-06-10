@@ -1,7 +1,7 @@
 import PropTypes from 'prop-types';
 import './classesCard.css'
 import { FaUsers } from 'react-icons/fa';
-const ClassesCard = ({course, badgeText}) => {
+const ClassesCard = ({course, badgeText, handleselect}) => {
     return (
         <div            
             className={`${course.totalSeat - course.students === 0 ? "pointer-events-none bg-red-500 text-white" : 'bg-sky-50'} card shadow-sm hover:shadow-xl mx-auto lg:mx-0  rounded-md c-card1`}
@@ -21,7 +21,7 @@ const ClassesCard = ({course, badgeText}) => {
                 <div className="flex justify-between">
                     <p className="flex items-center small"><FaUsers /> {course.students}</p>
                     {/* TODO: implement functionalities for select button */}
-                    <button className="text-white hover:text-slate-700 capitalize font-normal mr-4  px-3 btn btn-sm border-0 bg-[#4169E1]">select</button>
+                    <button className="text-white hover:text-slate-700 capitalize font-normal mr-4  px-3 btn btn-sm border-0 bg-[#4169E1]" onClick={()=>handleselect(course)}>select</button>
                 </div>
             </div>
             <div className="c-go-corner hidden" href="#">
@@ -34,7 +34,8 @@ const ClassesCard = ({course, badgeText}) => {
 };
 ClassesCard.propTypes = {
     course: PropTypes.object,
-    badgeText: PropTypes.string
+    badgeText: PropTypes.string,
+    handleselect: PropTypes.func,
     
 };
 export default ClassesCard;
