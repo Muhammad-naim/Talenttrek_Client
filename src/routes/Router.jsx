@@ -6,6 +6,7 @@ import LoginPage from "../pages/loginPage/LoginPage";
 import SignupPage from "../pages/signupPage/SignupPage";
 import InstructorsPage from "../pages/instructorsPage/InstructorsPage";
 import ClassesPage from "../pages/classesPage/ClassesPage";
+import Dashboard from "../pages/dashboard/Dashboard";
 
 const router = createBrowserRouter([
     {
@@ -33,9 +34,10 @@ const router = createBrowserRouter([
                 path: '/classes',
                 element: <ClassesPage/>
             },
-            // {
-            //     path: 
-            // },
+            {
+                path: '/dashboard',
+                element: <Dashboard/>
+            },
             // {
             //     path: 
             // },

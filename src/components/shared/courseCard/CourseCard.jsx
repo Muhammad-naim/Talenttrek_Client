@@ -3,9 +3,7 @@ import PropTypes from 'prop-types';
 
 const CourseCard = ({ course, badgeText }) => {
     return (
-        <div
-            className="card card-compact h-full bg-base-100 shadow-sm duration-200 hover:shadow-xl "
-        >
+        <div className="card card-compact h-full bg-base-100 shadow-md duration-200 hover:shadow-xl ">
             <figure className="h-40 overflow-hidden">
                 <img src={course.imageURL} className="h-full w-full object-cover" />
                 {
@@ -14,9 +12,8 @@ const CourseCard = ({ course, badgeText }) => {
                         <></>
                 }
             </figure>
-            <div className="card-body  ">
-
-                <h2 className="card-title">{course.name}</h2>
+            <div className="px-3 ">
+                <h2 className="">{course.name}</h2>
                 <p>By: {course.instructor}</p>
                 <p>Price: ${course.price}</p>
                 <p className=""><small>{course.description}</small></p>
