@@ -1,6 +1,6 @@
 import Lottie from "lottie-react";
 import loginAmination from '../../assets/login.json'
-import { Link, useNavigate } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import { useForm } from "react-hook-form";
 import { useContext } from "react";
 import { AuthContext } from "../../firebase/authProvider/AuthProvider";
@@ -9,19 +9,21 @@ import { Helmet } from "react-helmet-async";
 const LoginPage = () => {
     const { signInwithpassword, signInWithSocials, googleProvider, } = useContext(AuthContext)
     const navigate = useNavigate()
+    const location = useLocation()
+    const from = location?.state?.from?.pathname;
+    console.log(from);
     const { register, handleSubmit,} = useForm();
     const onSubmit = data => {
         signInwithpassword(data?.email, data?.password)
             .then(() =>
-                navigate('/')
+                navigate(from || '/')
         )
         .catch(error=>console.log(error.message))
     };
     const handleSocialLogin = () => {
-        console.log('licker');
         signInWithSocials(googleProvider)
             .then(() => {
-                navigate('/')
+                navigate(from || '/')
         })
         
     }

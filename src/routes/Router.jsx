@@ -10,6 +10,7 @@ import Dashboard from "../pages/dashboard/Dashboard";
 import MyClasses from "../pages/dashboard/students/MyClasses";
 import EnrolledClasses from "../pages/dashboard/students/enrolledClasses";
 import MyProfile from "../pages/dashboard/students/MyProfile";
+import PrivateRoute from "../firebase/privateRoute/PrivateRoute";
 
 const router = createBrowserRouter([
     {
@@ -39,7 +40,7 @@ const router = createBrowserRouter([
             },
             {
                 path: '/dashboard',
-                element: <Dashboard />,
+                element: <PrivateRoute><Dashboard /></PrivateRoute>,
                 children: [
                     {
                         path: '/dashboard',
