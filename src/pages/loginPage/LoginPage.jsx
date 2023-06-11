@@ -11,7 +11,6 @@ const LoginPage = () => {
     const navigate = useNavigate()
     const location = useLocation()
     const from = location?.state?.from?.pathname;
-    console.log(from);
     const { register, handleSubmit,} = useForm();
     const onSubmit = data => {
         signInwithpassword(data?.email, data?.password)

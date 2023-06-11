@@ -1,0 +1,8 @@
+.dashbar li{
+    color: ;
+}
+.dashbar li:hover{
+    color: aqua;
+    background-color: rgb(99, 130, 224);
+    transition: ease-in-out .1s;
+}

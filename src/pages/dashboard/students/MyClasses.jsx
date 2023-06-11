@@ -1,10 +1,11 @@
-import { useContext, useEffect, useState } from "react";
+import { useContext,  } from "react";
 import { AuthContext } from "../../../firebase/authProvider/AuthProvider";
 import useBookings from "../../../hooks/useBookings";
 import Swal from "sweetalert2";
+import { Link } from "react-router-dom";
 
 const MyClasses = () => {
-    const { user } = useContext(AuthContext)
+    // const { user } = useContext(AuthContext)
     // const token = localStorage.getItem('access-token')
     // const [myBookings, setMyBookings] = useState([])
     // useEffect(() => {
@@ -80,10 +81,15 @@ const MyClasses = () => {
                                     </td>
                                     <td>{booking.instructor}</td>
                                     <th>
-                                        <button className="capitalize btn btn-ghost btn-xs text-white bg-[#4169E1] hover:bg-[#3251ad]">pay</button>
+                                        <Link
+                                            className="capitalize btn btn-ghost btn-xs text-white bg-[#4169E1] hover:bg-[#3251ad]"
+                                            to={'/dashboard/payment'}
+                                            state={{...booking}}
+                                        >pay</Link>
                                     </th>
                                     <th>
                                         <button className="btn btn-ghost btn-xs text-white bg-red-600 hover:bg-red-700" onClick={() => handleDelete(booking?._id)}>Delete</button>
+                                        
                                     </th>
                                 </tr>
 
