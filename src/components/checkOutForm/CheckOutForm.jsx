@@ -20,11 +20,9 @@ const CheckOutForm = ({ course }) => {
     const { user } = useAuth();
     const [transactionId, setTransactionId] = useState('')
     const [isProcessing, setIsProcessing] = useState(false)
-    console.log(course);
     useEffect(() => {
         axiosSecure.post("/create-payment-intent", { price })
             .then(data => {
-                console.log(data);
                 setClientSecret(data.data.clientSecret)
             })
     }, [axiosSecure, price])
@@ -41,17 +39,13 @@ const CheckOutForm = ({ course }) => {
             return
         }
         setIsProcessing(true)
-        const { error, paymentMethod } = await stripe.createPaymentMethod({
+        const { error,  } = await stripe.createPaymentMethod({
             type: "card",
             card
         })
         if (error) {
-            console.log('[error]', error);
             setPaymentFeedback(error.message)
-        } else {
-            console.log('[PaymentMethod]', paymentMethod);
         }
-        //
         const { paymentIntent, error: confirmationError } = await stripe.confirmCardPayment(
             clientSecret,
             {
@@ -70,17 +64,15 @@ const CheckOutForm = ({ course }) => {
         setIsProcessing(false)
         if (paymentIntent?.status === "succeeded") {
             setTransactionId(paymentIntent?.id)
-            const transaction_ID = paymentIntent?.id;
             const paymentData = {
                 transactionId,
                 price,
-                courseID: course._id,
+                courseID: course.courseID,
                 email: user.email,
                 name: course.name
             }
             axiosSecure.post('/payment', paymentData)
                 .then(res => {
-                    console.log(res.data.insertedId);
                     if (res.data.insertedId) {
                         Swal.fire({
                             position: 'top-end',

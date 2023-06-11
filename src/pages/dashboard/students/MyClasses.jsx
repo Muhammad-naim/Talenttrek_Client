@@ -1,5 +1,3 @@
-import { useContext,  } from "react";
-import { AuthContext } from "../../../firebase/authProvider/AuthProvider";
 import useBookings from "../../../hooks/useBookings";
 import Swal from "sweetalert2";
 import { Link } from "react-router-dom";
@@ -69,7 +67,7 @@ const MyClasses = () => {
                                     key={booking?._id}
                                 >
                                     <th>
-                                        {index}
+                                        {index+1}
                                     </th>
                                     <td>
                                         <div className="flex items-center space-x-3">
