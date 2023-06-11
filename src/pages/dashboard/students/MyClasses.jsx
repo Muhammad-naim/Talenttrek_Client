@@ -47,6 +47,7 @@ const MyClasses = () => {
     }
     return (
         <div>
+            <h2 className="text-xl font-semibold text-center my-3">My Classes</h2>
             <div className="overflow-x-auto">
                 <table className="table">
                     {/* head */}
@@ -56,8 +57,8 @@ const MyClasses = () => {
                             <th>Name</th>
                             <th>Price</th>
                             <th>Instructor</th>
-                            <th>payment</th>
-                            <th>Delete</th>
+                            <th colSpan={2} className="">Action</th>
+                            {/* <th>Delete</th> */}
                         </tr>
                     </thead>
                     <tbody>
@@ -65,6 +66,7 @@ const MyClasses = () => {
                             bookings.length > 0 ? bookings.map((booking, index) => {
                                 return <tr
                                     key={booking?._id}
+                                    className="hover:bg-white hover:"
                                 >
                                     <th>
                                         {index+1}
@@ -74,8 +76,8 @@ const MyClasses = () => {
                                             {booking.name}
                                         </div>
                                     </td>
-                                    <td>
-                                        <span className="">$ {booking.price}</span>
+                                    <td >
+                                        <span >$ {booking.price}</span>
                                     </td>
                                     <td>{booking.instructor}</td>
                                     <th>

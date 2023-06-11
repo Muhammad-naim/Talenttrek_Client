@@ -7,9 +7,11 @@ import { AuthContext } from "../../firebase/authProvider/AuthProvider";
 import Swal from "sweetalert2";
 import { useLocation, useNavigate } from "react-router-dom";
 import useScrollTop from "../../hooks/useScrollTop";
+import useAxiosSecure from "../../hooks/useAxiosSecure";
 const ClassesPage = () => {
     const [courses, loading] = useCourses()
     const { user } = useContext(AuthContext)
+    const [axiosSecure] = useAxiosSecure()
     const navigate = useNavigate();
     const location = useLocation();
     useScrollTop(location?.pathname)
@@ -18,17 +20,26 @@ const ClassesPage = () => {
             const courseID = course._id;
             delete course._id;
             const selectedCourse = { ...course, courseID, user: user.email }
-            fetch('http://localhost:5000/book-class', {
-                method: "POST",
-                headers: {
-                    "content-type": "application/json",
-                },
-                body: JSON.stringify(selectedCourse)
-            })
-                .then(res => res.json())
+            // fetch('http://localhost:5000/book-class', {
+            //     method: "POST",
+            //     headers: {
+            //         "content-type": "application/json",
+            //     },
+            //     body: JSON.stringify(selectedCourse)
+            // })
+            //     .then(res => res.json())
+                axiosSecure.post('/book-class', selectedCourse)
                 .then(data => {
-
-                    if (data.insertedId) {
+                    if (data.data.isExist) {
+                        Swal.fire({
+                            position: 'top-end',
+                            icon: 'success',
+                            title: 'Already selected.',
+                            showConfirmButton: false,
+                            timer: 1000
+                        });
+                    }
+                    if (data.data.insertedId) {
                         console.log(data);
                         Swal.fire({
                             position: 'top-end',
@@ -37,6 +48,7 @@ const ClassesPage = () => {
                             showConfirmButton: false,
                             timer: 1000
                         });
+                        
                     }
                 })
         }

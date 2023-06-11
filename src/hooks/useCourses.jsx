@@ -7,12 +7,7 @@ const useCourses = () => {
             const res = await fetch('http://localhost:5000/courses');
             return res.json();
         }
-
-
     })
-    // if (loading) {
-    //     return <span className="loading loading-spinner loading-lg"></span>
-    // }
     return [courses, loading, refetch]
 }
 export default useCourses;

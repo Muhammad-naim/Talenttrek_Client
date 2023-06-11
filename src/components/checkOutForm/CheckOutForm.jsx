@@ -67,6 +67,7 @@ const CheckOutForm = ({ course }) => {
             const paymentData = {
                 transactionId,
                 price,
+                bookingID: course._id,
                 courseID: course.courseID,
                 email: user.email,
                 name: course.name
@@ -86,10 +87,6 @@ const CheckOutForm = ({ course }) => {
                     }
                 })
         }
-
-
-
-
     }
     return (
         <form onSubmit={handleSubmit} className="w-2/3 ">
