@@ -9,7 +9,7 @@ const SignupPage = () => {
     const [showPassword, setShowPassword] = useState(false)
     const { createUser, updateUserInfo, } = useContext(AuthContext)
     const navigate = useNavigate()
-    const { register, handleSubmit,reset , formState: { errors } } = useForm();
+    const { register, handleSubmit, reset, formState: { errors } } = useForm();
     const onSubmit = data => {
         if (data.password !== data.confirm) {
             Swal.fire({

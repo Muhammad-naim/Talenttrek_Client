@@ -14,6 +14,8 @@ import PrivateRoute from "../firebase/privateRoute/PrivateRoute";
 import Payment from "../pages/dashboard/students/Payment";
 import Test from "../pages/dashboard/test";
 import PaymentHistory from "../pages/dashboard/students/PaymentHistory";
+import AddClass from "../pages/dashboard/instructor/AddClass";
+import InstructorClasses from "../pages/dashboard/instructor/InstructorClasses";
 
 const router = createBrowserRouter([
     {
@@ -43,7 +45,7 @@ const router = createBrowserRouter([
             },
             {
                 path: '/dashboard',
-                element: <PrivateRoute><Dashboard /></PrivateRoute>,
+                element: <PrivateRoute><Dashboard/></PrivateRoute>,
                 children: [
                     {
                         path: '/dashboard',
@@ -65,6 +67,18 @@ const router = createBrowserRouter([
                         path: 'history',
                         element: <PaymentHistory/>
                     },
+                    {
+                        path: 'add-class',
+                        element: <AddClass/>
+                    },
+                    {
+                        path: 'Instructor-classes',
+                        element: <InstructorClasses/>
+                    },
+                    // {
+                    //     path: 'history',
+                    //     element: <PaymentHistory/>
+                    // },
                 ]
             },            
             {
