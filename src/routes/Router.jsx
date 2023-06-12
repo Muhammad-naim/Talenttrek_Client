@@ -19,6 +19,8 @@ import InstructorClasses from "../pages/dashboard/instructor/InstructorClasses";
 import EditClass from "../pages/dashboard/instructor/EditClass";
 import ManageClasses from "../pages/dashboard/admin/ManageClasses";
 import ManageUsers from "../pages/dashboard/admin/ManageUsers";
+import InstructorRoute from "../firebase/instructorRoute/InstructorRoute";
+import AdminRoute from "../firebase/adminRoute/AdminRoute";
 
 const router = createBrowserRouter([
     {
@@ -72,23 +74,23 @@ const router = createBrowserRouter([
                     },
                     {
                         path: 'add-class',
-                        element: <AddClass/>
+                        element: <InstructorRoute><AddClass/></InstructorRoute>
                     },
                     {
                         path: 'Instructor-classes',
-                        element: <InstructorClasses/>
+                        element: <InstructorRoute><InstructorClasses/></InstructorRoute>
                     },
                     {
                         path: 'update-class',
-                        element: <EditClass/>
+                        element: <InstructorRoute><EditClass/></InstructorRoute>
                     },
                     {
                         path: 'manage-classes',
-                        element: <ManageClasses/>
+                        element: <AdminRoute><ManageClasses/></AdminRoute>
                     },
                     {
                         path: 'manage-users',
-                        element: <ManageUsers/>
+                        element: <AdminRoute><ManageUsers/></AdminRoute>
                     },
                 ]
             },            
