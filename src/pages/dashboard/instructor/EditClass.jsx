@@ -12,14 +12,11 @@ const EditClass = () => {
     const location = useLocation()
     const navigate = useNavigate()
     const course = location.state;
-    console.log(course);
     const onSubmit = data => {
         data.courseID = course._id;
-        console.log(data);
         data.price = parseFloat(data.price).toFixed(2) //taking price 2 digit after decimal
         axiosSecure.patch('/update-class', data)
             .then(res => {
-                console.log(res);
                 if (res.data.modifiedCount > 0) {
                     Swal.fire({
                         position: 'center',

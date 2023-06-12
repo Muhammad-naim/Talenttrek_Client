@@ -9,9 +9,11 @@ const InstructorsPage = () => {
     const location = useLocation()
     useScrollTop(location?.pathname)
     useEffect(() => {
-        fetch('http://localhost:5000/instructors')
+        fetch('https://talenttrek-server-muhammad-naim.vercel.app/instructors')
             .then(res => res.json())
-            .then(data => setInstructors(data))
+            .then(data => {
+                setInstructors(data)
+            })
     }, [])
     return (
         <div className="grid grid-cols-1 lg:grid-cols-4  mt-8">

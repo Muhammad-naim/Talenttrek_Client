@@ -32,7 +32,6 @@ const ClassesPage = () => {
                         });
                     }
                     if (data.data.insertedId) {
-                        console.log(data);
                         Swal.fire({
                             position: 'top-end',
                             icon: 'success',

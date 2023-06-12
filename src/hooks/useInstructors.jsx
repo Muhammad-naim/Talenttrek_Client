@@ -4,11 +4,9 @@ const useInstructors = () => {
     const { data: instructors = [], isLoading: loading, refetch } = useQuery({
         queryKey: ['instructors'],
         queryFn: async () => {
-            const res = await fetch('http://localhost:5000/instructors');
+            const res = await fetch('https://talenttrek-server-muhammad-naim.vercel.app/instructors');
             return res.json();
         }
-
-
     })
     return [instructors, loading, refetch]
 }

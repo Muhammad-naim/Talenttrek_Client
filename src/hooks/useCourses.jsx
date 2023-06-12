@@ -4,7 +4,7 @@ const useCourses = () => {
     const { data: courses = [], isLoading: loading, refetch } = useQuery({
         queryKey: ['courses'],
         queryFn: async () => {
-            const res = await fetch('http://localhost:5000/courses');
+            const res = await fetch('https://talenttrek-server-muhammad-naim.vercel.app/courses');
             return res.json();
         }
     })

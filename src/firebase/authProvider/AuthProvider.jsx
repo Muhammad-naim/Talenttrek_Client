@@ -33,10 +33,9 @@ const AuthProvider = ({children}) => {
     // observe user state and get user data 
     useEffect(() => {
         const unsubscribe = onAuthStateChanged(auth, (loggedUser) => {
-            setUser(loggedUser);
             if (loggedUser?.email) {
                 const userEmail = loggedUser.email;
-                fetch('http://localhost:5000/jwt', {
+                fetch('https://talenttrek-server-muhammad-naim.vercel.app/jwt', {
                     method: "POST",
                     headers: {
                         "content-type" : "application/json",
@@ -45,11 +44,13 @@ const AuthProvider = ({children}) => {
                 })
                     .then(res => res.json())
                     .then(data => {
-                        console.log(data);
                         localStorage.setItem('access-token', data.token)
                         loggedUser.role = data.role.role || "user";
                         setUser(loggedUser)
                     })
+                    .catch(error => {
+                    return null
+                })
                 
             }
             setLoading(false)

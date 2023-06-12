@@ -4,7 +4,6 @@ import { FaUsers } from 'react-icons/fa';
 import useAuth from '../../../hooks/useAuth';
 const ClassesCard = ({ course, badgeText, handleselect }) => {
     const { user } = useAuth();
-    console.log(user?.role);
     return (
         <div            
             className={`${course.totalSeat - course.students === 0 ? "pointer-events-none bg-red-500 text-white" : 'bg-sky-50'} card shadow-sm hover:shadow-xl mx-auto lg:mx-0  rounded-md c-card1`}
@@ -23,7 +22,6 @@ const ClassesCard = ({ course, badgeText, handleselect }) => {
                 <p className="small">Available Seat: {course.totalSeat - course.students}</p>
                 <div className="flex justify-between">
                     <p className="flex items-center small"><FaUsers /> {course.students}</p>
-                    {/* TODO: implement functionalities for select button */}
                     <button
                         className="text-white hover:text-slate-700 capitalize font-normal mr-4  px-3 btn btn-sm border-0 bg-[#4169E1]"
                         onClick={() => handleselect(course)}

@@ -4,6 +4,7 @@ import useAuth from "../../../hooks/useAuth";
 import { Link } from "react-router-dom";
 import Aos from "aos";
 import 'aos/dist/aos.css';
+import Swal from "sweetalert2";
 
 const InstructorClasses = () => {
     const [axiosSecure] = useAxiosSecure()
@@ -12,15 +13,39 @@ const InstructorClasses = () => {
     useEffect(() => {
         axiosSecure(`/instructor-classes/${user?.email}`)
             .then(res => {
-                console.log(res.data);
                 setInstructorClasses(res.data)
+            })
+            .catch(err => {
+                console.log(err);
             })
     }, [axiosSecure, user])
     useEffect(() => {
         Aos.init()
-    },[])
+    }, [])
     const handleDelete = (id) => {
         console.log(id);
+        Swal.fire({
+            title: 'Are you sure?',
+            text: "You won't be able to revert this!",
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#3085d6',
+            cancelButtonColor: '#d33',
+            confirmButtonText: 'Yes, delete it!'
+        }).then((result) => {
+            if (result.isConfirmed) {
+                axiosSecure.delete(`/instructor/class/${id}`)
+                    .then(res => {
+                        console.log(res);
+                        if (res.data.deletedCount > 0) {
+                            Swal.fire('Deleted!', 'Your class has been deleted.', 'success')
+                            const updatedClasses = instructorClasses.filter(item => item?._id !== id)
+                            setInstructorClasses(updatedClasses)
+                        }
+                    })
+            }
+        })
+
     }
     return (
         <div>
@@ -40,12 +65,12 @@ const InstructorClasses = () => {
                     </thead>
                     <tbody>
                         {
-                            instructorClasses.length > 0 ? instructorClasses.map((course , index) => {
+                            instructorClasses.length > 0 ? instructorClasses.map((course, index) => {
                                 return <tr
                                     key={course?._id}
                                     className="hover:bg-white text-center scro"
                                     data-aos="fade-left"
-                                    data-aos-delay={index*50}
+                                    data-aos-delay={index * 50}
                                 >
                                     <th>
                                         {index + 1}

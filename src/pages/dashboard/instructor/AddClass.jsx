@@ -4,30 +4,48 @@ import useAxiosSecure from "../../../hooks/useAxiosSecure";
 import Swal from "sweetalert2";
 import { useNavigate } from "react-router-dom";
 
+const image_hosting_token = import.meta.env.VITE_IMG_UPLOAD_TOKEN;
+
 const AddClass = () => {
     const { register, handleSubmit, reset } = useForm();
     const { user } = useAuth();
     const [axiosSecure] = useAxiosSecure()
     const navigate = useNavigate()
+    const img_hosting_url = `https://api.imgbb.com/1/upload?expiration=600&key=${image_hosting_token}`
     const onSubmit = data => {
-        data.price = parseFloat(data.price).toFixed(2) //taking price 2 digit after decimal
-        const courseData = { ...data, students: 0, status: "pending" }
-        axiosSecure.post('/add-class', courseData)
-            .then(res => {
-                console.log(res);
-                if (res.data.insertedId) {
-                    Swal.fire({
-                        position: 'center',
-                        icon: 'success',
-                        title: 'Class posted successfully!',
-                        text: "Admin will review your class.",
-                        showConfirmButton: false,
-                        timer: 1500
-                    })
-                    reset()
-                    navigate('/dashboard/Instructor-classes')
+
+        const formData = new FormData();
+        formData.append('image', data.photo[0])
+        fetch(img_hosting_url, {
+            method: 'POST',
+            body: formData
+        })
+            .then(res => res.json())
+            .then(imgResponse => {
+                console.log((imgResponse));
+                if (imgResponse.success) {
+                    const imgURL = imgResponse.data.display_url;
+                    data.photo = imgURL
+                    data.price = parseFloat(data.price).toFixed(2) //taking price 2 digit after decimal
+                    const courseData = { ...data, students: 0, status: "pending" }
+                    axiosSecure.post('/add-class', courseData)
+                        .then(res => {
+                            if (res.data.insertedId) {
+                                Swal.fire({
+                                    position: 'center',
+                                    icon: 'success',
+                                    title: 'Class posted successfully!',
+                                    text: "Admin will review your class.",
+                                    showConfirmButton: false,
+                                    timer: 1500
+                                })
+                                reset()
+                                navigate('/dashboard/Instructor-classes')
+                            }
+                        })
                 }
             })
+
     }
     return (
         <div>

@@ -5,11 +5,12 @@ import { useEffect, useState } from "react";
 const Banner = () => {
     const [bannerContent, setBannerContent] = useState([])
     useEffect(() => {
-        fetch('http://localhost:5000/banner')
+        fetch('https://talenttrek-server-muhammad-naim.vercel.app/banner')
             .then(res => res.json())
             .then(data => {
                 setBannerContent(data)
             })
+            .catch(err => console.log(' '))
     }, [])
     if (bannerContent.length === 0) {
         return <div className="h-96 flex justify-center items-center">

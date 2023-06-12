@@ -12,7 +12,7 @@ const useSelect = () => {
             const courseID = course._id;
             delete course._id;
             const selectedCourse = { ...course, courseID, user: user.email }
-            fetch('http://localhost:5000/book-class', {
+            fetch('https://talenttrek-server-muhammad-naim.vercel.app/book-class', {
                 method: "POST",
                 headers: {
                     "content-type": "application/json",

@@ -24,7 +24,7 @@ const SignupPage = () => {
                 updateUserInfo(data.name, data.photoURl)
                     .then(() => {
                         const user = { name: data.name, email: data.email, role: 'user' }
-                        fetch('http://localhost:5000/users', {
+                        fetch('https://talenttrek-server-muhammad-naim.vercel.app/users', {
                             method: "POST",
                             headers: {
                                 "content-type" : 'application/json',
