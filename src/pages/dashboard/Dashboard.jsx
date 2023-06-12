@@ -43,9 +43,8 @@ const Dashboard = () => {
                                         </> :
                                         <>
                                     <li><Link to={'/dashboard'}><FaUser />Profile</Link></li>
-                                    <li><Link to={'/dashboard/myclasses'}><FaChalkboardTeacher />My Classes</Link></li>
-                                    <li><Link to={'/dashboard/enrolled-class'}><SiGoogleclassroom />Enrolled classes</Link></li>
-                                    <li><Link to={'/dashboard/history'}><FaMoneyCheckAlt />Payment history</Link></li>
+                                    <li><Link to={'/dashboard/manage-classes'}><FaChalkboardTeacher /> Manage Classes</Link></li>
+                                    <li><Link to={'/dashboard/manage-users'}><SiGoogleclassroom />Manage Users</Link></li>
                                 </>                                 
                         }
                     </ul>

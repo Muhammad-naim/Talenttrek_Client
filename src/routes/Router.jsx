@@ -17,6 +17,8 @@ import PaymentHistory from "../pages/dashboard/students/PaymentHistory";
 import AddClass from "../pages/dashboard/instructor/AddClass";
 import InstructorClasses from "../pages/dashboard/instructor/InstructorClasses";
 import EditClass from "../pages/dashboard/instructor/EditClass";
+import ManageClasses from "../pages/dashboard/admin/ManageClasses";
+import ManageUsers from "../pages/dashboard/admin/ManageUsers";
 
 const router = createBrowserRouter([
     {
@@ -79,6 +81,14 @@ const router = createBrowserRouter([
                     {
                         path: 'update-class',
                         element: <EditClass/>
+                    },
+                    {
+                        path: 'manage-classes',
+                        element: <ManageClasses/>
+                    },
+                    {
+                        path: 'manage-users',
+                        element: <ManageUsers/>
                     },
                 ]
             },            
