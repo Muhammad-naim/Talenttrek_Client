@@ -1,13 +1,19 @@
 import { useForm } from "react-hook-form";
 import useAuth from "../../../hooks/useAuth";
+import useAxiosSecure from "../../../hooks/useAxiosSecure";
 
 const AddClass = () => {
     const { register, handleSubmit } = useForm();
-    const { user } = useAuth()
+    const { user } = useAuth();
+    const [axiosSecure] = useAxiosSecure()
     // const [data, setData] = useState("");
     const onSubmit = data => {
         const courseData = { ...data, students: 0, status: "pending" }
         console.log(courseData);
+        axiosSecure.post('/add-class', courseData)
+            .then(res => {
+            console.log(res);
+        })
     }
     return (
         <div>
