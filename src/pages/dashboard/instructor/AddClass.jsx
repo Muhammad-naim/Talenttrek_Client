@@ -1,19 +1,33 @@
 import { useForm } from "react-hook-form";
 import useAuth from "../../../hooks/useAuth";
 import useAxiosSecure from "../../../hooks/useAxiosSecure";
+import Swal from "sweetalert2";
+import { useNavigate } from "react-router-dom";
 
 const AddClass = () => {
-    const { register, handleSubmit } = useForm();
+    const { register, handleSubmit, reset } = useForm();
     const { user } = useAuth();
     const [axiosSecure] = useAxiosSecure()
-    // const [data, setData] = useState("");
+    const navigate = useNavigate()
     const onSubmit = data => {
+        data.price = parseFloat(data.price).toFixed(2) //taking price 2 digit after decimal
         const courseData = { ...data, students: 0, status: "pending" }
-        console.log(courseData);
         axiosSecure.post('/add-class', courseData)
             .then(res => {
-            console.log(res);
-        })
+                console.log(res);
+                if (res.data.insertedId) {
+                    Swal.fire({
+                        position: 'center',
+                        icon: 'success',
+                        title: 'Class posted successfully!',
+                        text: "Admin will review your class.",
+                        showConfirmButton: false,
+                        timer: 1500
+                    })
+                    reset()
+                    navigate('/dashboard/Instructor-classes')
+                }
+            })
     }
     return (
         <div>

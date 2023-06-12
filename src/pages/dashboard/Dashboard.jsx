@@ -6,7 +6,7 @@ import useScrollTop from "../../hooks/useScrollTop";
 import './Dashboard.css'
 import useAuth from "../../hooks/useAuth";
 const Dashboard = () => {
-    const { user } = useAuth()
+    const { user, } = useAuth()
     const location = useLocation()
     useScrollTop(location?.pathname)
     useScrollTop()
@@ -46,8 +46,7 @@ const Dashboard = () => {
                                     <li><Link to={'/dashboard/myclasses'}><FaChalkboardTeacher />My Classes</Link></li>
                                     <li><Link to={'/dashboard/enrolled-class'}><SiGoogleclassroom />Enrolled classes</Link></li>
                                     <li><Link to={'/dashboard/history'}><FaMoneyCheckAlt />Payment history</Link></li>
-                                </>
-                                 
+                                </>                                 
                         }
                     </ul>
 

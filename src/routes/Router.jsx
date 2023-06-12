@@ -16,6 +16,7 @@ import Test from "../pages/dashboard/test";
 import PaymentHistory from "../pages/dashboard/students/PaymentHistory";
 import AddClass from "../pages/dashboard/instructor/AddClass";
 import InstructorClasses from "../pages/dashboard/instructor/InstructorClasses";
+import EditClass from "../pages/dashboard/instructor/EditClass";
 
 const router = createBrowserRouter([
     {
@@ -75,10 +76,10 @@ const router = createBrowserRouter([
                         path: 'Instructor-classes',
                         element: <InstructorClasses/>
                     },
-                    // {
-                    //     path: 'history',
-                    //     element: <PaymentHistory/>
-                    // },
+                    {
+                        path: 'update-class',
+                        element: <EditClass/>
+                    },
                 ]
             },            
             {
