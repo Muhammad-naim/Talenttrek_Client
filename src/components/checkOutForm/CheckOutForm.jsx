@@ -5,6 +5,7 @@ import useAuth from "../../hooks/useAuth";
 import Swal from "sweetalert2";
 import PropTypes from 'prop-types';
 import { useNavigate } from "react-router-dom";
+import moment from "moment/moment";
 
 
 
@@ -65,12 +66,14 @@ const CheckOutForm = ({ course }) => {
         if (paymentIntent?.status === "succeeded") {
             setTransactionId(paymentIntent?.id)
             const paymentData = {
-                transactionId,
+                transactionId: paymentIntent?.id,
                 price,
                 bookingID: course._id,
                 courseID: course.courseID,
                 email: user.email,
-                name: course.name
+                name: course.name,
+                instructor: course.instructor,
+            date: `${moment().subtract(10, 'days').calendar()} at ${moment().format('LT')}`
             }
             axiosSecure.post('/payment', paymentData)
                 .then(res => {

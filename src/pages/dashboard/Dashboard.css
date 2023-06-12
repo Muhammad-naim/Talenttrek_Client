@@ -1,7 +1,12 @@
-.dashbar li{
-    color: ;
+.dashbar li a{
+    border-radius: 0px;
 }
-.dashbar li:hover{
+.dashbar li a:focus{
+    color: aqua;
+    background-color: rgb(87, 117, 206);
+
+}
+.dashbar li a:hover{
     color: aqua;
     background-color: rgb(99, 130, 224);
     transition: ease-in-out .1s;

@@ -13,6 +13,7 @@ import MyProfile from "../pages/dashboard/students/MyProfile";
 import PrivateRoute from "../firebase/privateRoute/PrivateRoute";
 import Payment from "../pages/dashboard/students/Payment";
 import Test from "../pages/dashboard/test";
+import PaymentHistory from "../pages/dashboard/students/PaymentHistory";
 
 const router = createBrowserRouter([
     {
@@ -59,6 +60,10 @@ const router = createBrowserRouter([
                     {
                         path: 'payment',
                         element: <Payment/>
+                    },
+                    {
+                        path: 'history',
+                        element: <PaymentHistory/>
                     },
                 ]
             },            

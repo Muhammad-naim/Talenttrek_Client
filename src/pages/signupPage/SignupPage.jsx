@@ -23,7 +23,7 @@ const SignupPage = () => {
             .then(() => {
                 updateUserInfo(data.name, data.photoURl)
                     .then(() => {
-                        const user = { name: data.name, email: data.email }
+                        const user = { name: data.name, email: data.email, role: 'user' }
                         fetch('http://localhost:5000/users', {
                             method: "POST",
                             headers: {

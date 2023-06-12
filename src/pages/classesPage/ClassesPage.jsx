@@ -20,14 +20,6 @@ const ClassesPage = () => {
             const courseID = course._id;
             delete course._id;
             const selectedCourse = { ...course, courseID, user: user.email }
-            // fetch('http://localhost:5000/book-class', {
-            //     method: "POST",
-            //     headers: {
-            //         "content-type": "application/json",
-            //     },
-            //     body: JSON.stringify(selectedCourse)
-            // })
-            //     .then(res => res.json())
                 axiosSecure.post('/book-class', selectedCourse)
                 .then(data => {
                     if (data.data.isExist) {

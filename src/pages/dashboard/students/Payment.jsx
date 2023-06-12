@@ -2,6 +2,7 @@ import { Elements } from "@stripe/react-stripe-js";
 import { loadStripe } from "@stripe/stripe-js";
 import CheckOutForm from "../../../components/checkOutForm/CheckOutForm";
 import { useLocation } from "react-router-dom";
+import { Helmet } from "react-helmet-async";
 
 
 const stripePromise = loadStripe(import.meta.env.VITE_PUBLISHED_KEY)
@@ -9,9 +10,11 @@ const stripePromise = loadStripe(import.meta.env.VITE_PUBLISHED_KEY)
 const Payment = () => {
     const location = useLocation()
     const course = location.state;
-    console.log(course);
     return (
-        <div className="">
+        <div>
+            <Helmet>
+                <title>Payment | Talenttrek</title>
+            </Helmet>
             <h2 className="text-xl my-3 font-semibold border-b-2 pb-1">Payment</h2>
             <div className=" mb-3">
                 <h2>Course Name: {course.name}</h2>

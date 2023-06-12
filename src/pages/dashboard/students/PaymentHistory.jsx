@@ -2,16 +2,18 @@ import { useEffect, useState } from "react";
 import useAxiosSecure from "../../../hooks/useAxiosSecure";
 import useAuth from "../../../hooks/useAuth";
 
-const EnrolledClasses = () => {
+const PaymentHistory = () => {
     const { user } = useAuth()
-    const [enrolledCourses, setEnrolledCourses] = useState([])
     const [axiosSecure] = useAxiosSecure()
+    const [paymentHistory, setPaymentHistory] = useState([])
     useEffect(() => {
-        axiosSecure(`/enrolled-classes/${user?.email}`)
+        axiosSecure(`/payment-history/${user.email}`)
             .then(res => {
-                setEnrolledCourses(res.data);
+                if (res.data.length > 0) {
+                    setPaymentHistory(res.data)
+                }
             })
-    }, [axiosSecure, user])
+    }, [user, axiosSecure])
     return (
         <div>
             <div className="overflow-x-auto">
@@ -20,18 +22,18 @@ const EnrolledClasses = () => {
                     <thead>
                         <tr>
                             <th>#</th>
-                            <th>Name</th>                
-                            <th>Instructor</th>
-                            <th>Price</th>
-                            <th>Enrolled On</th>                            
+                            <th>Trasnaction ID</th>
+                            <th>Amount</th>
+                            {/* <th>Price</th> */}
+                            <th>Paid On</th>
                             {/* <th>Delete</th> */}
                         </tr>
                     </thead>
                     <tbody>
                         {
-                            enrolledCourses.length > 0 ? enrolledCourses.map((booking, index) => {
+                            paymentHistory.length > 0 ? paymentHistory.map((history, index) => {
                                 return <tr
-                                    key={booking?._id}
+                                    key={history?._id}
                                     className="hover:bg-white hover:"
                                 >
                                     <th>
@@ -39,16 +41,13 @@ const EnrolledClasses = () => {
                                     </th>
                                     <td>
                                         <div className="flex items-center space-x-3">
-                                            {booking.name}
+                                            {history.transactionId}
                                         </div>
                                     </td>
                                     <td >
-                                        <span>{booking.instructor}</span>
+                                        <span>$ {history.price}</span>
                                     </td>
-                                    <td>$ {booking.price}</td>
-                                    <td>
-                                        {booking.date}
-                                    </td>
+                                    <td>{history.date}</td>
                                     {/* <th>
                                         text
                                     </th> */}
@@ -64,4 +63,4 @@ const EnrolledClasses = () => {
     );
 };
 
-export default EnrolledClasses;
+export default PaymentHistory;

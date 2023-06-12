@@ -1,18 +1,9 @@
 import useBookings from "../../../hooks/useBookings";
 import Swal from "sweetalert2";
 import { Link } from "react-router-dom";
+import { Helmet } from "react-helmet-async";
 
 const MyClasses = () => {
-    // const { user } = useContext(AuthContext)
-    // const token = localStorage.getItem('access-token')
-    // const [myBookings, setMyBookings] = useState([])
-    // useEffect(() => {
-    //     fetch(`http://localhost:5000/my-bookings?email=${user?.email}`, {
-    //         headers: {
-    //             "Authorization": `bearar ${token}`
-    //         }
-    //     }).then(res => res.json()).then(data => setMyBookings(data))
-    // },[user,token])
     const [bookings, refetch] = useBookings()
     const handleDelete = (id) => {
         Swal.fire({
@@ -47,6 +38,9 @@ const MyClasses = () => {
     }
     return (
         <div>
+            <Helmet>
+                <title>My classes | Talenttrek</title>
+            </Helmet>
             <h2 className="text-xl font-semibold text-center my-3">My Classes</h2>
             <div className="overflow-x-auto">
                 <table className="table">
