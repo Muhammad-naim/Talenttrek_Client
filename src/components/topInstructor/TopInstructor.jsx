@@ -36,7 +36,7 @@ const TopInstructor = () => {
 
     const [instructors] = useInstructors()
     return (
-        <div className="my-4 overflow-x-hidden">
+        <div className="my-4 overflow-hidden ">
             <Heading
                 Heading={"Meet Our Popular Instructor"}
                 subHeading={"World class instructors are ready to teach you"}
@@ -46,7 +46,7 @@ const TopInstructor = () => {
                     ref={targetRef}
                     data-aos="fade-right"
                     data-aos-once="false"
-                    className="lg:pl-12 flex flex-col text-center lg:text-left justify-center">
+                    className="lg:pl-12 flex flex-col text-center lg:text-left justify-center scrollbar-hidden">
                     <p className="text-lg mb-3">
                         Learning from our top instructors is an investment in your linguistic future. Their expertise and dedication to your success will propel you towards fluency and open doors to new opportunities in your personal and professional life.
                     </p>

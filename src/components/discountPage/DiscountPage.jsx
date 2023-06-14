@@ -97,8 +97,6 @@ const DiscountPage = () => {
                             return <div
                                 key={course._id}
                                 className="keen-slider__slide py-3"
-                                // data-aos="fade-up"
-                                // data-aos-offset="100"
                             >
                                 <ClassesCard
                                     course={course}

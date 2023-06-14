@@ -55,7 +55,7 @@ const ManageClasses = () => {
             <div className="overflow-x-auto ">
                 <table className="table " >
                     {/* head */}
-                    <thead className="sticky top-0 z-50 bg-white">
+                    <thead className="sticky top-0 bg-white">
                         <tr className="text-center">
                             <th>Course</th>
                             <th>Status</th>

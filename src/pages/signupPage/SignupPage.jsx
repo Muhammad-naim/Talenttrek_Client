@@ -4,10 +4,11 @@ import { useContext, useState } from "react";
 import { AuthContext } from "../../firebase/authProvider/AuthProvider";
 import Swal from 'sweetalert2'
 import { Helmet } from "react-helmet-async";
+import { FcGoogle } from "react-icons/fc";
 
 const SignupPage = () => {
     const [showPassword, setShowPassword] = useState(false)
-    const { createUser, updateUserInfo, } = useContext(AuthContext)
+    const { createUser, updateUserInfo, googleProvider, signInWithSocials } = useContext(AuthContext)
     const navigate = useNavigate()
     const { register, handleSubmit, reset, formState: { errors } } = useForm();
     const onSubmit = data => {
@@ -16,19 +17,18 @@ const SignupPage = () => {
                 icon: 'error',
                 title: "Password didn't match",
                 text: 'Please check again!',
-              })
+            })
             return
         }
         createUser(data?.email, data?.password)
             .then(() => {
                 updateUserInfo(data.name, data.photoURl)
-                    .then((res) => {
+                    .then(() => {
                         const user = { name: data.name, email: data.email, role: 'student', photoURl: data.photoURL }
-                        console.log(res);
-                        fetch('http://localhost:5000/users', {
+                        fetch('https://talenttrek-server.vercel.app/users', {
                             method: "POST",
                             headers: {
-                                "content-type" : 'application/json',
+                                "content-type": 'application/json',
                             },
                             body: JSON.stringify(user)
                         })
@@ -45,14 +45,43 @@ const SignupPage = () => {
                                     });
                                     navigate('/')
                                 }
-                            })                       
+                            })
                     })
-                
+
             }
 
             )
             .catch(error => console.log(error.message))
     };
+    const handleSocialLogin = () => {
+        signInWithSocials(googleProvider)
+            .then((res) => {
+                console.log(res);
+                const user = { name: res.user.displayName, email: res.user.email, role: 'student', photoURl: res.user.photoURL }
+                fetch('https://talenttrek-server.vercel.app/users', {
+                    method: "POST",
+                    headers: {
+                        "content-type": 'application/json',
+                    },
+                    body: JSON.stringify(user)
+                })
+                    .then(res => res.json())
+                    .then(data => {
+                        console.log(data);
+                        if (data.insertedId) {
+                            reset();
+                            Swal.fire({
+                                position: 'center',
+                                icon: 'success',
+                                title: 'User created successfully.',
+                                showConfirmButton: false,
+                                timer: 1500
+                            });
+                            navigate('/')
+                        }
+                    })
+            })
+    }
     return (
         <div>
             <Helmet>
@@ -104,7 +133,7 @@ const SignupPage = () => {
                                     {...register("confirm", {
                                         minLength: 6,
                                         pattern: /(?=.*[A-Z])(?=.*[!@#$&*])(?=.*[0-9])/,
-                                        
+
                                     })} required className="input input-bordered h-8" />
                                 {errors.confirm?.type === 'minLength' && <p className="text-red-600">Password must be 6 characters</p>}
                                 {errors.confirm?.type === 'pattern' && <p className="text-red-600">Password must contain one Uppercase, one number and one special character.</p>}
@@ -116,11 +145,18 @@ const SignupPage = () => {
                                 <input type="checkbox" onChange={() => setShowPassword(!showPassword)} className="checkbox checkbox-xs" />
                                 <p>Show password</p>
                             </div>
-                            <div className="form-control mt-4">
-                                <button className="btn btn-ghost btn-sm btn-outline">Signup</button>
+                            <div className="form-control mt-4 ">
+                                <button className="capitalize btn btn-primary btn-md btn-outline w-9/12 mx-auto">Signup</button>
                             </div>
                             <p className="text-center my-2"><small>Already have an account? <Link to={'/login'}>login</Link></small></p>
                         </form>
+                        <div className="divider  w-5/6 mx-auto">or</div>
+                        <div className="flex justify-center px-4 mb-4">
+                            <button
+                                className="btn btn-md btn-primary btn-outline w-9/12"
+                                onClick={handleSocialLogin}
+                            ><FcGoogle className="text-lg" /> google</button>
+                        </div>
                     </div>
                 </div>
             </div>

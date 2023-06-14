@@ -5,10 +5,13 @@ import { useForm } from "react-hook-form";
 import { useContext, useState } from "react";
 import { AuthContext } from "../../firebase/authProvider/AuthProvider";
 import { Helmet } from "react-helmet-async";
+import { FcGoogle } from "react-icons/fc";
+import { FaEye, FaEyeSlash } from "react-icons/fa";
 
 const LoginPage = () => {
     const { signInwithpassword, signInWithSocials, googleProvider, } = useContext(AuthContext)
-    const [feedbackMessage, setFeedbackMessage]= useState('')
+    const [feedbackMessage, setFeedbackMessage] = useState('')
+    const [isVisible, setIsVisible] = useState(false)
     const navigate = useNavigate()
     const location = useLocation()
     const from = location?.state?.from?.pathname;
@@ -53,12 +56,22 @@ const LoginPage = () => {
                                 <input type="email" placeholder="email" {...register("email")} required className="input input-bordered" />
                                 {/* {errors.email && <span>This field is required</span>} */}
                             </div>
-                            <div className="form-control">
+                            <div className="form-control ">
                                 <label className="label">
                                     <span className="label-text">Password</span>
                                 </label>
-                                <input type="password" placeholder="password" {...register("password")}
-                                    required className="input input-bordered" />
+                                <div className="relative">
+                                <input type={isVisible ? 'text' : 'password'} placeholder="password" {...register("password")}
+                                    required className="input input-bordered w-full" />
+                                <span className="absolute top-1/4 right-2 mt-1 inline" onClick={() => setIsVisible(!isVisible)}>
+                                    {
+                                        isVisible ?
+                                            <FaEyeSlash /> :
+                                            <FaEye />
+                                    }
+                                </span>
+                            </div>
+
                                 <small className="text-red-600 pl-1">{feedbackMessage}</small>
                                 <label className="label">
                                     <a href="#" className="label-text-alt link link-hover">Forgot password?</a>
@@ -74,9 +87,9 @@ const LoginPage = () => {
                         <div className="divider  w-5/6 mx-auto">or</div>
                         <div className="flex justify-center mb-4">
                             <button
-                                className="btn btn-md btn-outline w-5/6  bg-[#4169E1] hover:bg-[#3251ad]"
+                                className="btn btn-md btn-primary btn-outline w-5/6"
                                 onClick={handleSocialLogin}
-                            >google</button>
+                            ><FcGoogle className="text-lg"/> google</button>
                         </div>
                     </div>
                 </div>

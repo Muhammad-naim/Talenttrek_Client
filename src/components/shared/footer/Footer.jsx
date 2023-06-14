@@ -7,25 +7,25 @@ const Footer = () => {
             <footer className="footer p-10 bg-base-200 text-base-content">
                 <div>
                     <img src={logo} className='w-24' />
-                    <p>ACME Industries Ltd.<br />Providing reliable tech since 1992</p>
+                    <p>Talenttrek dot com<br />Providing reliable extra-curricular activities support.</p>
                 </div>
                 <div>
                     <span className="footer-title">Services</span>
-                    <a className="link link-hover">Branding</a>
-                    <a className="link link-hover">Design</a>
-                    <a className="link link-hover">Marketing</a>
-                    <a className="link link-hover">Advertisement</a>
+                    <a className="link link-hover">Language club</a>
+                    <a className="link link-hover">International services</a>
+                    <a className="link link-hover">Special Care</a>
+                    <a className="link link-hover"></a>
                 </div>
                 <div>
                     <span className="footer-title">Company</span>
                     <a className="link link-hover">About us</a>
-                    <a className="link link-hover">Contact</a>
+                    <a className="link link-hover">Instructors</a>
                     <a className="link link-hover">Jobs</a>
-                    <a className="link link-hover">Press kit</a>
+                    
                 </div>
                 <div>
                     <span className="footer-title">Social</span>
-                    <div className="grid grid-flow-col gap-4">
+                    <div className="grid grid-flow-col gap-4 child:hover:fill-[]">
                         <Link><FaTwitter className='text-2xl' /></Link>
                         <Link><FaFacebook className='text-2xl' /></Link>
                         <Link><FaEnvelope className='text-2xl' /></Link>

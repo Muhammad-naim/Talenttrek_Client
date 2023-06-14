@@ -7,7 +7,6 @@ import { AuthContext } from '../../../firebase/authProvider/AuthProvider';
 const Navbar = () => {
     const [theme, setTheme] = useState(localStorage.getItem('theme') ? localStorage.getItem('theme'): 'light')
     const { user, logOut } = useContext(AuthContext)
-    console.log(user);
  
     //User signOut handler function
     const handleLogout = () => {
@@ -87,9 +86,9 @@ const Navbar = () => {
                             <div className="tooltip tooltip-left " data-tip={user?.displayName}>
                                 <img src={user?.photoURL} alt="user" className="h-8 w-8 rounded-full" />
                             </div>
-                            <button onClick={handleLogout} className="ml-3 text-white p-1 rounded  bg-[#4169E1] hover:bg-[#3251ad]">Logout</button>
+                            <button onClick={handleLogout} className="capitalize ml-3 text-white p-1 rounded  bg-[#4169E1] hover:bg-[#3251ad]">Logout</button>
                         </> :
-                            <Link to={'/login'} className="btn btn-ghost btn-sm text-white  bg-[#4169E1] hover:bg-[#3251ad]">Login</Link>
+                            <Link to={'/login'} className="capitalize btn btn-ghost btn-sm text-white  bg-[#4169E1] hover:bg-[#3251ad]">Login</Link>
                     }
                 </div>
             </div>

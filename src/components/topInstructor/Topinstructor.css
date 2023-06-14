@@ -17,3 +17,7 @@
     font-weight: bold;
     color: #fff;
   }
+
+  .scrollbar-hidden::-webkit-scrollbar {
+    display: none;
+  }
