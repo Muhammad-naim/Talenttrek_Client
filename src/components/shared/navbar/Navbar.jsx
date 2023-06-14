@@ -10,11 +10,8 @@ const Navbar = () => {
  
     //User signOut handler function
     const handleLogout = () => {
-        console.log("clicked");
         logOut()
-         
-        console.log(user);
-    }
+             }
     //Theme toggler function
     const handleTheme = (e) => {
         if (e.target.checked) {

@@ -6,7 +6,6 @@ import Swal from "sweetalert2";
 const ManageClasses = () => {
     const [classes, refetch] = useAllClasses();
     const [axiosSecure] = useAxiosSecure()
-    console.log(classes);
     const handleFeedback =async (id) => {
         const { value: text } = await Swal.fire({
             input: 'textarea',
@@ -18,11 +17,7 @@ const ManageClasses = () => {
             showCancelButton: true,
             confirmButtonText: 'Send',
         })
-
         if (text) {
-            // console.log(text);
-            const feedback = { feedback: text }
-            console.log(feedback);
             axiosSecure.patch('/feedback', { feedback: text, id: id })
                 .then(res => {
                     if (res.data.modifiedCount > 0) {
@@ -36,7 +31,6 @@ const ManageClasses = () => {
 
         axiosSecure.patch('/update-status', status)
             .then(res => {
-                console.log(res)
                 if (res.data.modifiedCount) {
                     Swal.fire({
                         position: 'center',
