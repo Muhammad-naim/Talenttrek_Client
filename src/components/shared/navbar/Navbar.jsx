@@ -1,4 +1,4 @@
-import { Link } from 'react-router-dom';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
 import logo from '../../../assets/Logo.png'
 import './navbar.css'
 import { useContext, useEffect, useState } from 'react';
@@ -7,10 +7,16 @@ import { AuthContext } from '../../../firebase/authProvider/AuthProvider';
 const Navbar = () => {
     const [theme, setTheme] = useState(localStorage.getItem('theme') ? localStorage.getItem('theme'): 'light')
     const { user, logOut } = useContext(AuthContext)
+    console.log(user);
+ 
+    //User signOut handler function
     const handleLogout = () => {
         console.log("clicked");
         logOut()
+         
+        console.log(user);
     }
+    //Theme toggler function
     const handleTheme = (e) => {
         if (e.target.checked) {
             setTheme('dark')
@@ -81,9 +87,9 @@ const Navbar = () => {
                             <div className="tooltip tooltip-left " data-tip={user?.displayName}>
                                 <img src={user?.photoURL} alt="user" className="h-8 w-8 rounded-full" />
                             </div>
-                            <button onClick={handleLogout} className="ml-3 text-white p-1 rounded bg-[#4169E1]">Logout</button>
+                            <button onClick={handleLogout} className="ml-3 text-white p-1 rounded  bg-[#4169E1] hover:bg-[#3251ad]">Logout</button>
                         </> :
-                            <Link to={'/login'} className="btn btn-ghost btn-sm text-white bg-[#4169E1]">Login</Link>
+                            <Link to={'/login'} className="btn btn-ghost btn-sm text-white  bg-[#4169E1] hover:bg-[#3251ad]">Login</Link>
                     }
                 </div>
             </div>

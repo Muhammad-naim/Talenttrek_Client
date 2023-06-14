@@ -72,11 +72,11 @@ const ManageClasses = () => {
                                 >
 
                                     <td>
-                                        <div className="flex flex-col child:text-left child:ml-0 w-40">
-                                            <div className="w-40"><img src={course.imageURL} alt="" /></div>
-                                            <p className="font-semibold"> {course.name}</p>
-                                            <p>Instructor: {course.instructor}</p>
-                                            <p>Email: {course.email}</p>
+                                        <div className="flex flex-col child:text-left  child:ml-0 ">
+                                            <div className="w-40 "><img src={course.imageURL} alt="" /></div>
+                                            <small className="font-semibold"> {course.name}</small>
+                                            <small className="">Instructor: {course.instructor}</small>
+                                            <small>Email: {course.email}</small>
                                         </div>
                                     </td>
 

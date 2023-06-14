@@ -11,7 +11,6 @@ const googleProvider = new GoogleAuthProvider()
 const AuthProvider = ({children}) => {
     const [user, setUser] = useState(null);
     const [loading, setLoading] = useState(true)
-    const [userDataLoaded, setUserDataLoaded] = useState(false);
     // create user with email and password
     const createUser = (email, password) => {
         setLoading(true)
@@ -34,7 +33,8 @@ const AuthProvider = ({children}) => {
     // observe user state and get user data 
     useEffect(() => {
         const unsubscribe = onAuthStateChanged(auth, (loggedUser) => {
-            if (loggedUser?.email) {
+            setUser(loggedUser)
+            if (loggedUser) {
                 const userEmail = loggedUser.email;
                 fetch('https://talenttrek-server-muhammad-naim.vercel.app/jwt', {
                     method: "POST",
@@ -48,24 +48,25 @@ const AuthProvider = ({children}) => {
                         localStorage.setItem('access-token', data?.token)
                         loggedUser.role = data?.role?.role || "student";
                         setUser(loggedUser)
-                        setUserDataLoaded(true)
                     })
                     .catch( error => {
-                    return null
+                     console.log(error);
                 })
                 
             }
             setLoading(false)
         })
         return () => unsubscribe()
-    }, [loading])
+    }, [])
+
     // sign out user 
     const logOut = () => {
+        setLoading(true)
         return signOut(auth);
     }
     const authInfo = {
         user,
-        loading: !userDataLoaded,
+        loading,
         googleProvider,
         createUser,
         signInwithpassword,

@@ -2,12 +2,13 @@ import Lottie from "lottie-react";
 import loginAmination from '../../assets/login.json'
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import { useForm } from "react-hook-form";
-import { useContext } from "react";
+import { useContext, useState } from "react";
 import { AuthContext } from "../../firebase/authProvider/AuthProvider";
 import { Helmet } from "react-helmet-async";
 
 const LoginPage = () => {
     const { signInwithpassword, signInWithSocials, googleProvider, } = useContext(AuthContext)
+    const [feedbackMessage, setFeedbackMessage]= useState('')
     const navigate = useNavigate()
     const location = useLocation()
     const from = location?.state?.from?.pathname;
@@ -17,14 +18,21 @@ const LoginPage = () => {
             .then(() =>
                 navigate(from || '/')
         )
-        .catch(error=>console.log(error.message))
+            .catch(error => {
+                console.log(error.message)
+                if (error.message.includes('wrong-password')) {
+                    setFeedbackMessage("Wrong password!");
+                }
+                if (error.message.includes('user-not-found')) {
+                    setFeedbackMessage("User not found!");
+                }
+            })
     };
     const handleSocialLogin = () => {
         signInWithSocials(googleProvider)
             .then(() => {
                 navigate(from || '/')
-        })
-        
+        })        
     }
     return (
         <div>
@@ -51,6 +59,7 @@ const LoginPage = () => {
                                 </label>
                                 <input type="password" placeholder="password" {...register("password")}
                                     required className="input input-bordered" />
+                                <small className="text-red-600 pl-1">{feedbackMessage}</small>
                                 <label className="label">
                                     <a href="#" className="label-text-alt link link-hover">Forgot password?</a>
                                 </label>
@@ -65,7 +74,7 @@ const LoginPage = () => {
                         <div className="divider  w-5/6 mx-auto">or</div>
                         <div className="flex justify-center mb-4">
                             <button
-                                className="btn btn-sm btn-outline w-5/6"
+                                className="btn btn-md btn-outline w-5/6  bg-[#4169E1] hover:bg-[#3251ad]"
                                 onClick={handleSocialLogin}
                             >google</button>
                         </div>

@@ -11,9 +11,8 @@ const AddClass = () => {
     const { user } = useAuth();
     const [axiosSecure] = useAxiosSecure()
     const navigate = useNavigate()
-    const img_hosting_url = `https://api.imgbb.com/1/upload?expiration=600&key=${image_hosting_token}`
+    const img_hosting_url = `https://api.imgbb.com/1/upload?key=${image_hosting_token}`
     const onSubmit = data => {
-
         const formData = new FormData();
         formData.append('image', data.imageURL[0])
         fetch(img_hosting_url, {
