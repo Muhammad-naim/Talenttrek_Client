@@ -25,7 +25,7 @@ const ClassesCard = ({ course, badgeText, handleselect }) => {
                     <button
                         className="text-white hover:text-slate-700 capitalize font-normal mr-4  px-3 btn btn-sm border-0 bg-[#4169E1]"
                         onClick={() => handleselect(course)}
-                        disabled={user?.role === "user" ? false : true}
+                        disabled={user?.role === "student" ? false : true}
                     >select</button>
                 </div>
             </div>

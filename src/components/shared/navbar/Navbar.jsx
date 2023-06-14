@@ -8,6 +8,7 @@ const Navbar = () => {
     const [theme, setTheme] = useState(localStorage.getItem('theme') ? localStorage.getItem('theme'): 'light')
     const { user, logOut } = useContext(AuthContext)
     const handleLogout = () => {
+        console.log("clicked");
         logOut()
     }
     const handleTheme = (e) => {

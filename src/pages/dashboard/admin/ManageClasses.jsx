@@ -1,50 +1,111 @@
-import { useEffect, useState } from "react";
 import useAxiosSecure from "../../../hooks/useAxiosSecure";
-import { FaUsers } from "react-icons/fa";
+import { VscFeedback } from "react-icons/Vsc";
+import useAllClasses from "../../../hooks/useAllClasses";
+import Swal from "sweetalert2";
 
 const ManageClasses = () => {
+    const [classes, refetch] = useAllClasses();
     const [axiosSecure] = useAxiosSecure()
-    const [classesData, setClassesData] = useState([])
-    useEffect(() => {
-        axiosSecure('/all-courses')
-            .then(res => {
-                setClassesData(res.data)
+    console.log(classes);
+    const handleFeedback =async (id) => {
+        const { value: text } = await Swal.fire({
+            input: 'textarea',
+            inputLabel: 'Message',
+            inputPlaceholder: 'Type your Feedback here...',
+            inputAttributes: {
+                'aria-label': 'Type your Feedback here'
+            },
+            showCancelButton: true,
+            confirmButtonText: 'Send',
+        })
+
+        if (text) {
+            // console.log(text);
+            const feedback = { feedback: text }
+            console.log(feedback);
+            axiosSecure.patch('/feedback', { feedback: text, id: id })
+                .then(res => {
+                    if (res.data.modifiedCount > 0) {
+                        Swal.fire('Done!', 'Your Feedback has been sent.', 'success')
+                        refetch()
+                }
             })
-    }, [axiosSecure])
+        }
+    }
+    const handleApprove = (status) => {
+
+        axiosSecure.patch('/update-status', status)
+            .then(res => {
+                console.log(res)
+                if (res.data.modifiedCount) {
+                    Swal.fire({
+                        position: 'center',
+                        icon: 'success',
+                        title: status.status,
+                        showConfirmButton: false,
+                        timer: 1500
+                      })
+                    refetch()
+                }
+            })
+    }
     return (
         <div>
-            <div className="grid grid-cols-4 gap-2">
-                {
-                    classesData?.map(item => {
-                        return <div
-                            key={item._id}
-                            className={` card shadow-sm hover:shadow-xl mx-auto lg:mx-0  rounded-md c-card1`}
-                        >
-                            <figure className="w-full">
-                                <img src={item.imageURL} className="h-32 w-full" />
-                                
-                            </figure>
-                            <div className="gap-0 p-2 items-center child:hover:text-white text-left">
-                                <h3 className="font-semibold leading-5">{item.name}</h3>
-                                <small>By: {item.instructor}</small><br />                           
-                                <small>Email: {item.email}</small><br />                           
-                                <small className="">Students: {item.students}</small><br />
-                                <small className="">Available seat: {item.totalSeat - item.students}</small><br />
-                                <small className="">Status: {item.status}</small>
-                                <div className="flex justify-between mt-2">                                
-                                    <button
-                                        className="text-white hover:text-slate-700 capitalize font-normal mr-4  px-3 btn btn-xs border-0 bg-[#4169E1]"                            
-                                    >select</button>
-                                </div>
-                            </div>
-                            <div className="c-go-corner hidden" href="#">
-                                <div className="c-go-arrow">
 
-                                </div>
-                            </div>
-                        </div>
-                    })
-                }
+            <div className="overflow-x-auto ">
+                <table className="table " >
+                    {/* head */}
+                    <thead className="sticky top-0 z-50 bg-white">
+                        <tr className="text-center">
+                            <th>Course</th>
+                            <th>Status</th>
+                            <th>Feedback</th>
+                            <th className="text-center " colSpan={2}>Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {
+                            classes.length > 0 ? classes.map((course) => {
+                                return <tr
+                                    key={course?._id}
+                                    className="hover:bg-white text-center scro"
+                                >
+
+                                    <td>
+                                        <div className="flex flex-col child:text-left child:ml-0 w-40">
+                                            <div className="w-40"><img src={course.imageURL} alt="" /></div>
+                                            <p className="font-semibold"> {course.name}</p>
+                                            <p>Instructor: {course.instructor}</p>
+                                            <p>Email: {course.email}</p>
+                                        </div>
+                                    </td>
+
+                                    <td>{course.status}</td>
+                                    <td className="text-center">{course.feedback || "-"}</td>
+                                    <td className="h-full ">
+                                        <div className="flex flex-col gap-2">
+                                            <button
+                                                onClick={()=>handleApprove({id:course._id, status: "approved"})}
+                                                className="capitalize btn btn-ghost btn-xs text-white bg-green-500 hover:bg-green-600"
+                                                disabled={course.status !== 'pending'}
+                                            >approve
+                                            </button>
+                                            <button
+                                                onClick={()=>handleApprove({id:course._id, status: "denied"})}
+                                                className="capitalize btn btn-ghost btn-xs text-white bg-red-600 hover:bg-red-700"
+                                                disabled={course.status !== 'pending'}
+                                            >deny
+                                            </button>
+                                            <button className="capitalize btn btn-ghost btn-xs text-white bg-[#4169E1] hover:bg-[#3251ad]" onClick={() => handleFeedback(course?._id)}> <VscFeedback className="text-lg" />Feedback</button>
+                                        </div>
+                                    </td>
+                                </tr>
+
+                            })
+                                : <tr></tr>
+                        }
+                    </tbody>
+                </table>
             </div>
 
         </div>

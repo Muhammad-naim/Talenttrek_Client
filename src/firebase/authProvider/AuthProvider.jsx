@@ -11,6 +11,7 @@ const googleProvider = new GoogleAuthProvider()
 const AuthProvider = ({children}) => {
     const [user, setUser] = useState(null);
     const [loading, setLoading] = useState(true)
+    const [userDataLoaded, setUserDataLoaded] = useState(false);
     // create user with email and password
     const createUser = (email, password) => {
         setLoading(true)
@@ -44,11 +45,12 @@ const AuthProvider = ({children}) => {
                 })
                     .then(res => res.json())
                     .then(data => {
-                        localStorage.setItem('access-token', data.token)
-                        loggedUser.role = data.role.role || "user";
+                        localStorage.setItem('access-token', data?.token)
+                        loggedUser.role = data?.role?.role || "student";
                         setUser(loggedUser)
+                        setUserDataLoaded(true)
                     })
-                    .catch(error => {
+                    .catch( error => {
                     return null
                 })
                 
@@ -56,14 +58,14 @@ const AuthProvider = ({children}) => {
             setLoading(false)
         })
         return () => unsubscribe()
-    }, [])
+    }, [loading])
     // sign out user 
     const logOut = () => {
         return signOut(auth);
     }
     const authInfo = {
         user,
-        loading,
+        loading: !userDataLoaded,
         googleProvider,
         createUser,
         signInwithpassword,

@@ -1,5 +1,5 @@
 import { Link, Outlet, useLocation } from "react-router-dom";
-import { FaChalkboardTeacher, FaMoneyCheckAlt, FaPlusCircle, FaUser,  } from 'react-icons/fa';
+import { FaChalkboardTeacher, FaMoneyCheckAlt, FaPlusCircle, FaUser, FaUsersCog,  } from 'react-icons/fa';
 import { SiGoogleclassroom } from 'react-icons/Si';
 import { Helmet } from "react-helmet-async";
 import useScrollTop from "../../hooks/useScrollTop";
@@ -20,15 +20,15 @@ const Dashboard = () => {
                 <div className="drawer-content flex flex-col items-start justify-start gap-2 pl-3 bg-slate-100">
                     {/* Page content here */}
                     <label htmlFor="my-drawer-2" className="btn btn-xs drawer-button lg:hidden ">{'>'}</label>
-                    <div className="w-full">
+                    <div className="w-full relative">
                         <Outlet />
                     </div>
                 </div>
-                <div className="drawer-side">
+                <div className="drawer-side lg:top-[72px]">
                     <label htmlFor="my-drawer-2" className="drawer-overlay"></label>
                     <ul className="menu mt-14 lg:mt-0 p-0 w-56 h-full bg-sky-200 child:border-b child:border-slate-400 child:font-semibold dashbar">
                         {
-                            user.role === "user" ?
+                            user.role === "student" ?
                                 <>
                                     <li><Link to={'/dashboard'}><FaUser />Profile</Link></li>
                                     <li><Link to={'/dashboard/myclasses'}><FaChalkboardTeacher />My Classes</Link></li>
@@ -44,7 +44,7 @@ const Dashboard = () => {
                                         <>
                                     <li><Link to={'/dashboard'}><FaUser />Profile</Link></li>
                                     <li><Link to={'/dashboard/manage-classes'}><FaChalkboardTeacher /> Manage Classes</Link></li>
-                                    <li><Link to={'/dashboard/manage-users'}><SiGoogleclassroom />Manage Users</Link></li>
+                                    <li><Link to={'/dashboard/manage-users'}><FaUsersCog />Manage Users</Link></li>
                                 </>                                 
                         }
                     </ul>

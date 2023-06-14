@@ -15,17 +15,16 @@ const AddClass = () => {
     const onSubmit = data => {
 
         const formData = new FormData();
-        formData.append('image', data.photo[0])
+        formData.append('image', data.imageURL[0])
         fetch(img_hosting_url, {
             method: 'POST',
             body: formData
         })
             .then(res => res.json())
             .then(imgResponse => {
-                console.log((imgResponse));
                 if (imgResponse.success) {
                     const imgURL = imgResponse.data.display_url;
-                    data.photo = imgURL
+                    data.imageURL = imgURL
                     data.price = parseFloat(data.price).toFixed(2) //taking price 2 digit after decimal
                     const courseData = { ...data, students: 0, status: "pending" }
                     axiosSecure.post('/add-class', courseData)
@@ -52,7 +51,7 @@ const AddClass = () => {
             <form onSubmit={handleSubmit(onSubmit)} className="flex flex-col my-4 px-3 child:mb-2 child:rounded-sm  ">
                 <div className="child:p-2 grid grid-cols-2 gap-2 child:mb-2 child:rounded-sm">
                     <input required {...register("name")} type="text" placeholder="Class name" />
-                    <input required {...register("photo")} type="file" accept=".jpg,.jpeg,.png,.webp" className="border" />
+                    <input required {...register("imageURL")} type="file" accept=".jpg,.jpeg,.png,.webp" className="border" />
                     <input required {...register("instructor")} type="text" readOnly defaultValue={user.displayName} />
                     <input required {...register("email")} type="text" readOnly defaultValue={user.email} />
                     <input required {...register("price")} type="number" placeholder="Price" />

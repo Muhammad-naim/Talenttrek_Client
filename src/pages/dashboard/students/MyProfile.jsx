@@ -7,7 +7,7 @@ const MyProfile = () => {
         <div className="w-full flex flex-col items-start mt-3">
             <div className="h-24">
                 {
-                    user ?
+                    user?.photoURL ?
                         <img src={user?.photoURL} alt="user" className="rounded-full border-2 border-slate-600 h-24 "/>
                         : <FaUserCircle className="text-8xl" />
                 }
