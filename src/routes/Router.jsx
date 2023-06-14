@@ -12,7 +12,6 @@ import EnrolledClasses from "../pages/dashboard/students/enrolledClasses";
 import MyProfile from "../pages/dashboard/students/MyProfile";
 import PrivateRoute from "../firebase/privateRoute/PrivateRoute";
 import Payment from "../pages/dashboard/students/Payment";
-import Test from "../pages/dashboard/test";
 import PaymentHistory from "../pages/dashboard/students/PaymentHistory";
 import AddClass from "../pages/dashboard/instructor/AddClass";
 import InstructorClasses from "../pages/dashboard/instructor/InstructorClasses";
@@ -93,22 +92,8 @@ const router = createBrowserRouter([
                         element: <AdminRoute><ManageUsers/></AdminRoute>
                     },
                 ]
-            },            
-            {
-                path: 'test',
-                element: <Test/>
-            },
-            // {
-            //     path: 
-            // },
-            // {
-            //     path: 
-            // },
-            // {
-            //     path: 
-            // },
+            },                        
         ]
-
     },
 ]);
 

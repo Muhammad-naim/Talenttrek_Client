@@ -8,11 +8,10 @@ import { EffectCards } from "swiper";
 import AOS from 'aos';
 import 'aos/dist/aos.css';
 import useInstructors from "../../hooks/useInstructors";
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useRef,  } from "react";
 
 const TopInstructor = () => {
     const targetRef = useRef(null);
-    const [topInstructors, setTopInstructors] = useState([])
     const [instructors] = useInstructors()
     useEffect(() => {
         const observer = new IntersectionObserver((entries) => {
@@ -35,12 +34,6 @@ const TopInstructor = () => {
     useEffect(() => {
         AOS.init();
     }, [])
-
-    
-    useEffect(() => {
-        setTopInstructors(instructors.slice(0,6))
-    },[])
-
     return (
         <div className="my-4 overflow-hidden ">
             <Heading
@@ -68,7 +61,7 @@ const TopInstructor = () => {
                     className="mySwiper"
                 >
                     {
-                        topInstructors.map(instructor => {
+                        instructors.map(instructor => {
                             return <SwiperSlide
                                 key={instructor._id}
                                 className="bg-base-200 border-2 shadow-xl grid grid-rows-2 text-black font-normal "

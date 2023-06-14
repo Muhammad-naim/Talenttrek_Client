@@ -2,6 +2,7 @@ import useAxiosSecure from "../../../hooks/useAxiosSecure";
 import { VscFeedback } from "react-icons/Vsc";
 import useAllClasses from "../../../hooks/useAllClasses";
 import Swal from "sweetalert2";
+import { Helmet } from "react-helmet-async";
 
 const ManageClasses = () => {
     const [classes, refetch] = useAllClasses();
@@ -45,7 +46,11 @@ const ManageClasses = () => {
     }
     return (
         <div>
-
+            <Helmet>
+                <title>
+                    Manage classes | Talenttrek
+                </title>
+            </Helmet>
             <div className="overflow-x-auto ">
                 <table className="table " >
                     {/* head */}

@@ -1,9 +1,13 @@
 import Lottie from "lottie-react";
 import notFound from '../../assets/error.json'
 import { Link } from "react-router-dom";
+import { Helmet } from "react-helmet-async";
 const ErrorPage = () => {
     return (
         <div className="text-center flex-col justify-center items-center mt-12">
+            <Helmet>
+                    <title>Error | talenttrek</title>
+                </Helmet>
              <div className="text-center mx-auto w-1/3">
                         <Lottie animationData={notFound} loop={true} />;
             </div>

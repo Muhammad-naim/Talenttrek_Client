@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import useAxiosSecure from "../../../hooks/useAxiosSecure";
 import useAuth from "../../../hooks/useAuth";
+import { Helmet } from "react-helmet-async";
 
 const EnrolledClasses = () => {
     const { user } = useAuth()
@@ -14,6 +15,9 @@ const EnrolledClasses = () => {
     }, [axiosSecure, user])
     return (
         <div>
+            <Helmet>
+                    <title>Enrolled classes | talenttrek</title>
+                </Helmet>
             <div className="overflow-x-auto">
                 <table className="table">
                     {/* head */}

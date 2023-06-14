@@ -1,7 +1,6 @@
 import { Link, Outlet, useLocation } from "react-router-dom";
 import { FaChalkboardTeacher, FaMoneyCheckAlt, FaPlusCircle, FaUser, FaUsersCog,  } from 'react-icons/fa';
 import { SiGoogleclassroom } from 'react-icons/Si';
-import { Helmet } from "react-helmet-async";
 import useScrollTop from "../../hooks/useScrollTop";
 import './Dashboard.css'
 import useAuth from "../../hooks/useAuth";
@@ -11,10 +10,7 @@ const Dashboard = () => {
     useScrollTop(location?.pathname)
     useScrollTop()
     return (
-        <div className="">
-            <Helmet>
-                <title>Dashboard | Talenttrek</title>
-            </Helmet>
+        <div>
             <div className="drawer lg:drawer-open ">
                 <input id="my-drawer-2" type="checkbox" className="drawer-toggle" />
                 <div className="drawer-content flex flex-col items-start justify-start gap-2 pl-3 bg-slate-100">
