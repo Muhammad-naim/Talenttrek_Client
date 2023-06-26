@@ -12,7 +12,7 @@ import EnrolledClasses from "../pages/dashboard/students/enrolledClasses";
 import MyProfile from "../pages/dashboard/students/MyProfile";
 import PrivateRoute from "../firebase/privateRoute/PrivateRoute";
 import Payment from "../pages/dashboard/students/Payment";
-import PaymentHistory from "../pages/dashboard/students/PaymentHistory";
+ import PaymentHistory from "../pages/dashboard/students/PaymentHistory";
 import AddClass from "../pages/dashboard/instructor/AddClass";
 import InstructorClasses from "../pages/dashboard/instructor/InstructorClasses";
 import EditClass from "../pages/dashboard/instructor/EditClass";
